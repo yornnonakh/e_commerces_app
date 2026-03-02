@@ -6,9 +6,14 @@ class HomeController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber,
-      appBar: AppBar(title: Text('home Screen')),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.cyan,
+        title: Text(
+          'New Branch',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+      ),
     );
   }
 }
- 
