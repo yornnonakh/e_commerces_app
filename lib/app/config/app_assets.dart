@@ -1,7 +1,7 @@
 class AppAssets {
   // Images
-  static const logo = 'assets/images/logo.png';
-  static const loginBg = 'assets/images/login_bg.png';
+  static const onborading = 'assets/images/onborading.jpg';
+  static const slasph = 'assets/images/slasph_screen.jpg';
 
   // Icons
   static const icHome = 'assets/icons/ic_home.png';
