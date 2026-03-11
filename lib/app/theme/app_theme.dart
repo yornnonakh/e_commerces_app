@@ -3,7 +3,7 @@ import 'app_colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
     primaryColor: AppColors.primary,
     fontFamily: 'Roboto',
   );
