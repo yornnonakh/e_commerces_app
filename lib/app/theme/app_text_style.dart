@@ -5,13 +5,13 @@ class AppTextStyle {
   static const heading = TextStyle(
     fontSize: 22,
     fontWeight: FontWeight.bold,
-    fontFamily: 'Poppins',
+    fontFamily: 'Roboto',
     color: AppColors.textDark,
   );
 
   static const body = TextStyle(
     fontSize: 16,
-    fontFamily: 'Poppins',
+    fontFamily: 'Roboto',
     color: AppColors.textDark,
   );
 }

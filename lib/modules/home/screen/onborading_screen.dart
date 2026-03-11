@@ -29,7 +29,7 @@ class OnboradingScreen extends StatelessWidget {
               child: Text(
                 'The Best App \n For Your \n Shopping',
                 style: TextStyle(
-                  color: AppColors.background,
+                  color: AppColors.backgroundDark,
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
                 ),
@@ -52,7 +52,7 @@ class OnboradingScreen extends StatelessWidget {
                       child: Text(
                         'Sign In',
                         style: TextStyle(
-                          color: AppColors.background,
+                          color: AppColors.backgroundDark,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
