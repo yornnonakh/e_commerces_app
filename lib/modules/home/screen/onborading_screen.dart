@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/modules/auth/screen/login_screen.dart';
@@ -40,26 +42,52 @@ class OnboradingScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 100),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.primary,
-                        fixedSize: Size(350, 60),
-                        elevation: 5,
-                      ),
-                      onPressed: () {
-                        Get.to(Login());
-                      },
-                      child: Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: AppColors.backgroundDark,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: BackdropFilter(
+                        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                        child: InkWell(
+                          onTap: () {
+                            Get.to(Login());
+                          },
+                          child: Container(
+                            width: 350,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              // ignore: deprecated_member_use
+                              color: AppColors.backgroundLight.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(
+                                // ignore: deprecated_member_use
+                                color: AppColors.backgroundLight.withOpacity(0.3),
+                                width: 1.5,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  // ignore: deprecated_member_use
+                                  color: AppColors.backgroundDark.withOpacity(0.1),
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 6),
+                                ),
+                              ],
+                            ),
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Sign In',
+                              style: TextStyle(
+                                color: AppColors.backgroundDark,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+
+                  const SizedBox(height: 10),
+
                   InkWell(
                     onTap: () {
                       Get.to(SignUpScreen());
