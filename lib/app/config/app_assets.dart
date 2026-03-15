@@ -1,5 +1,6 @@
 class AppAssets {
   // Images
+  static const backgroundcover = 'assets/images/background_cover.jpg';
   static const onborading = 'assets/images/onborading.jpg';
   static const slasph = 'assets/images/slasph_screen.jpg';
   // products
