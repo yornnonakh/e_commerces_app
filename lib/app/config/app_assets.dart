@@ -7,8 +7,6 @@ class AppAssets {
   static const products1 = 'assets/images/products1.jpg';
   static const products2 = 'assets/images/products2.jpg';
   static const products3 = 'assets/images/products3.jpg';
-  static const background = 'assets/images/backgroundcover.jpg';
-  static const background2 = 'assets/images/backgroundcover2.jpg';
   // Icons
   static const icHome = 'assets/icons/ic_home.png';
   static const icUser = 'assets/icons/ic_user.png';
