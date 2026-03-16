@@ -37,10 +37,10 @@ class AppIcons {
 
 class AppAssetsProductPopular {
   static const productPopular = [
-    'assets/imags/product_popular1.webp',
-    'assets/imags/product_popular1.webp',
-    'assets/imags/product_popular1.webp',
-    'assets/imags/product_popular1.webp',
-    'assets/imags/product_popular1.webp',
+    'assets/images/products_popular/IDA000.jpg',
+    'assets/images/products_popular/IDH000.jpg',
+    'assets/images/products_popular/IDI000.jpg',
+    'assets/images/products_popular/IDJ000.jpg',
+    'assets/images/products_popular/IDM000.jpg',
   ];
 }
