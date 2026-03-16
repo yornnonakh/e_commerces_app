@@ -419,7 +419,10 @@ class HomeScreen extends StatelessWidget {
                               width: 200,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(AppAssets.productPopular),
+                                  image: AssetImage(
+                                    AppAssetsProductPopular
+                                        .productPopular[index],
+                                  ),
                                   fit: BoxFit.cover,
                                 ),
                               ),
