@@ -95,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                             child: Container(
                               width: 400,
-                              height: 165,
+                              height: 200,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(30),
                                 // ignore: deprecated_member_use
@@ -249,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                                   topRight: Radius.circular(30),
                                 ),
                                 image: DecorationImage(
-                                  image: AssetImage(AppAssets.products2),
+                                  image: AssetImage(AppAssets.productsLates),
                                   fit: BoxFit.contain,
                                 ),
                               ),
@@ -336,7 +336,7 @@ class HomeScreen extends StatelessWidget {
                               child: Container(
                                 margin: EdgeInsets.only(top: 10),
                                 width: 400,
-                                height: 165,
+                                height: 200,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   // ignore: deprecated_member_use
@@ -360,7 +360,7 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(
+                                      padding: EdgeInsets.only(
                                         top: 10,
                                         left: 10,
                                       ),
@@ -374,8 +374,8 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.only(
-                                        top: 8,
+                                      padding: EdgeInsets.only(
+                                        top: 5,
                                         left: 10,
                                       ),
                                       child: Text(
@@ -386,13 +386,31 @@ class HomeScreen extends StatelessWidget {
                                         ),
                                       ),
                                     ),
+                                    SizedBox(height: 80),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        left: 15,
+                                        right: 15,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text('rating'),
+                                          ElevatedButton(
+                                            onPressed: () {},
+                                            child: Icon(Icons.add_circle),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                           ),
 
-                          /// Product Image
+                          /// products popular
                           Positioned(
                             top: 0,
                             bottom: 0,
@@ -401,7 +419,7 @@ class HomeScreen extends StatelessWidget {
                               width: 200,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: AssetImage(AppAssets.products3),
+                                  image: AssetImage(AppAssets.productPopular),
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -414,47 +432,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
-        ),
-      ),
-
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(15),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-              decoration: BoxDecoration(
-                // ignore: deprecated_member_use
-                color: AppColors.backgroundLight.withOpacity(
-                  0.2,
-                ), // glass color
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(
-                  // ignore: deprecated_member_use
-                  color: AppColors.backgroundLight.withOpacity(0.3),
-                  width: 1.5,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    // ignore: deprecated_member_use
-                    color: AppColors.backgroundDark.withOpacity(0.1),
-                    blurRadius: 20,
-                    offset: Offset(0, 10),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.home, color: AppColors.cyan, size: 30),
-                  Icon(Icons.person, color: AppColors.cyan, size: 30),
-                  Icon(Icons.shop, color: AppColors.cyan, size: 30),
-                ],
-              ),
-            ),
           ),
         ),
       ),
