@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
+import 'package:e_commerces/modules/home/controller/hover_controller.dart';
+import 'package:e_commerces/modules/home/controller/product_controller.dart';
 import 'package:e_commerces/modules/home/screen/categories_screen.dart';
 import 'package:e_commerces/modules/home/screen/product_detail.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class HomeScreen extends StatelessWidget {
   List<String> text = ['All', 'For men', 'For women', 'Runing'];
 
   final controller = Get.find<HomeController>();
+  final controllerIcon = Get.put(ProductController());
+  final controllerimage = Get.put(HoverController());
 
   @override
   Widget build(BuildContext context) {
@@ -204,6 +207,7 @@ class HomeScreen extends StatelessWidget {
                       padding: EdgeInsets.all(10),
                       child: Stack(
                         children: [
+                          // Card background
                           ClipRRect(
                             borderRadius: BorderRadius.circular(30),
                             child: BackdropFilter(
@@ -213,21 +217,16 @@ class HomeScreen extends StatelessWidget {
                                 height: 280,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  // ignore: deprecated_member_use
                                   color: AppColors.backgroundLight.withOpacity(
                                     0.15,
                                   ),
                                   border: Border.all(
-                                    // ignore: deprecated_member_use
                                     color: AppColors.backgroundLight
-                                        // ignore: deprecated_member_use
                                         .withOpacity(0.3),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      // ignore: deprecated_member_use
                                       color: AppColors.backgroundDark
-                                          // ignore: deprecated_member_use
                                           .withOpacity(0.1),
                                       blurRadius: 15,
                                       offset: Offset(0, 8),
@@ -240,6 +239,7 @@ class HomeScreen extends StatelessWidget {
 
                           /// Product Image
                           Positioned(
+                            top: 0,
                             child: Container(
                               width: 200,
                               height: 180,
@@ -249,10 +249,41 @@ class HomeScreen extends StatelessWidget {
                                   topRight: Radius.circular(30),
                                 ),
                                 image: DecorationImage(
-                                  image: AssetImage(AppAssets.productsLates),
+                                  image: AssetImage(
+                                    AppAssetsProductLates.productLates[index],
+                                  ),
                                   fit: BoxFit.contain,
                                 ),
                               ),
+                            ),
+                          ),
+
+                          /// Product Name & Price
+                          Positioned(
+                            top: 185, // below image
+                            left: 15,
+                            right: 15,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Product ${index + 1}", // Replace with your product name list if available
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  "\$${(index + 1) * 10}", // Replace with your product price list
+                                  style: TextStyle(
+                                    color: AppColors.cyan,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
 
@@ -260,40 +291,49 @@ class HomeScreen extends StatelessWidget {
                           Positioned(
                             top: 15,
                             left: 15,
-                            child: InkWell(
-                              onTap: () {},
-                              child: Icon(
-                                Icons.favorite_border,
-                                color: Colors.white,
-                                size: 30,
+                            child: Obx(
+                              () => InkWell(
+                                onTap: controllerIcon.toggleFavorite,
+                                child: Icon(
+                                  controllerIcon.isFavorite.value
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: controllerIcon.isFavorite.value
+                                      ? Colors.white
+                                      : AppColors.cyan.withOpacity(0.3),
+                                  size: 30,
+                                ),
                               ),
                             ),
                           ),
 
                           /// Add to Cart Button
                           Positioned(
-                            bottom: 0,
-                            right: 0,
+                            bottom: 15,
+                            right: 15,
                             child: Container(
-                              width: 55,
-                              height: 55,
+                              width: 40,
+                              height: 40,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(30),
+                                borderRadius: BorderRadius.circular(20),
+                                color: AppColors.cyan.withOpacity(0.2),
+                                border: Border.all(
+                                  color: AppColors.cyan.withOpacity(0.8),
                                 ),
-                                // ignore: deprecated_member_use
-                                color: AppColors.backgroundDark.withOpacity(
-                                  0.25,
-                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: AppColors.cyan.withOpacity(0.15),
+                                    blurRadius: 4,
+                                  ),
+                                ],
                               ),
                               child: InkWell(
                                 onTap: () {
                                   Get.to(ProductDetail());
                                 },
                                 child: Icon(
-                                  Icons.add_circle,
-                                  color: Colors.white,
-                                  size: 28,
+                                  Icons.add,
+                                  color: AppColors.backgroundLight,
                                 ),
                               ),
                             ),
@@ -337,19 +377,16 @@ class HomeScreen extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 10),
                                 width: 400,
                                 height: 200,
+                                padding: EdgeInsets.all(15),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  // ignore: deprecated_member_use
                                   color: Colors.white.withOpacity(0.15),
                                   border: Border.all(
-                                    // ignore: deprecated_member_use
                                     color: Colors.white.withOpacity(0.3),
                                   ),
                                   boxShadow: [
                                     BoxShadow(
-                                      // ignore: deprecated_member_use
                                       color: AppColors.backgroundDark
-                                          // ignore: deprecated_member_use
                                           .withOpacity(0.1),
                                       blurRadius: 15,
                                       offset: Offset(0, 8),
@@ -359,49 +396,41 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 10,
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        'Amazing NIke',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15,
-                                          color: AppColors.backgroundLight,
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(
-                                        top: 5,
-                                        left: 10,
-                                      ),
-                                      child: Text(
-                                        '\$500',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: AppColors.backgroundLight,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(height: 80),
-                                    Padding(
-                                      padding: const EdgeInsets.only(
-                                        left: 15,
-                                        right: 15,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text('rating'),
-                                          ElevatedButton(
-                                            onPressed: () {},
-                                            child: Icon(Icons.add_circle),
+                                    Spacer(),
+                                    Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Get.to(ProductDetail());
+                                        },
+                                        child: Container(
+                                          width: 40,
+                                          height: 40,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              20,
+                                            ),
+                                            color: AppColors.cyan.withOpacity(
+                                              0.2,
+                                            ),
+                                            border: Border.all(
+                                              color: AppColors.cyan.withOpacity(
+                                                0.8,
+                                              ),
+                                            ),
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: AppColors.cyan
+                                                    .withOpacity(0.15),
+                                                blurRadius: 4,
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                          child: Icon(
+                                            Icons.add,
+                                            color: AppColors.backgroundLight,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -410,23 +439,63 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
 
-                          /// products popular
                           Positioned(
                             top: 0,
-                            bottom: 0,
-                            right: 100,
-                            child: Container(
-                              width: 200,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                    AppAssetsProductPopular
-                                        .productPopular[index],
+                            right: 75,
+                            child: SizedBox(
+                              width: 250,
+                              height: 180,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                      AppAssetsProductPopular
+                                          .productPopular[index],
+                                    ),
+                                    fit: BoxFit.cover,
                                   ),
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
+                          ),
+                          Positioned(
+                            top: 25,
+                            left: 15,
+                            child: Obx(() {
+                              bool isFav = controllerimage.favoriteList
+                                  .contains(index);
+                              return InkWell(
+                                onTap: () =>
+                                    controllerimage.toggleFavorite(index),
+                                child: Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: isFav
+                                        // ignore: deprecated_member_use
+                                        ? AppColors.danger.withOpacity(0.8)
+                                        // ignore: deprecated_member_use
+                                        : AppColors.backgroundLight.withOpacity(
+                                            0.3,
+                                          ),
+                                    border: Border.all(
+                                      // ignore: deprecated_member_use
+                                      color: AppColors.backgroundLight
+                                          .withOpacity(0.10),
+                                    ),
+                                  ),
+                                  child: Icon(
+                                    isFav
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: isFav
+                                        ? Colors.white
+                                        : Colors.white70,
+                                  ),
+                                ),
+                              );
+                            }),
                           ),
                         ],
                       ),
