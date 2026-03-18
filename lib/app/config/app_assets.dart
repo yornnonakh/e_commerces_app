@@ -15,6 +15,7 @@ class AppAssets {
   static const productsLates = 'assets/images/products_latest/IDC001.jpg';
   static const productPopular = 'assets/images/products_popular/IDA000.jpg';
 }
+
 class AppAssetsCover {
   static const coverSlide = [
     'assets/images/cover_slide/ID001.jpg',
@@ -42,5 +43,15 @@ class AppAssetsProductPopular {
     'assets/images/products_popular/IDI000.jpg',
     'assets/images/products_popular/IDJ000.jpg',
     'assets/images/products_popular/IDM000.jpg',
+  ];
+}
+
+class AppAssetsProductLates {
+  static const productLates = [
+    'assets/images/products_latest/IDC001.jpg',
+    'assets/images/products_latest/IDG000.jpg',
+    'assets/images/products_latest/IDL000.jpg',
+    'assets/images/products_latest/IDZ002.jpg',
+    'assets/images/products_latest/IDE000.jpg',
   ];
 }
