@@ -14,6 +14,10 @@ class AppAssets {
 
   static const productsLates = 'assets/images/products_latest/IDC001.jpg';
   static const productPopular = 'assets/images/products_popular/IDA000.jpg';
+
+  static String? get icons => null;
+
+  static Null get coverSlide => null;
 }
 
 class AppAssetsCover {
@@ -53,5 +57,27 @@ class AppAssetsProductLates {
     'assets/images/products_latest/IDL000.jpg',
     'assets/images/products_latest/IDZ002.jpg',
     'assets/images/products_latest/IDE000.jpg',
+  ];
+}
+
+class AppAsset {
+  // BACKGROUND
+  static const String backgroundcover = 'assets/images/background.png';
+
+  // ICONS
+  static const String icons = 'assets/icons/shopping_cart.webp';
+
+  // SLIDESHOW IMAGES
+  static const List<String> coverSlide = [
+    'assets/images/products_latest/IDC001.jpg',
+    'assets/images/products_latest/IDE000.jpg',
+    'assets/images/products_latest/IDG000.jpg',
+  ];
+
+  // EXAMPLE PRODUCT IMAGES
+  static const List<String> productImages = [
+    'assets/images/products_latest/IDC000.jpg',
+    'assets/images/products_latest/IDE000.jpg',
+    'assets/images/products_latest/IDG000.jpg',
   ];
 }

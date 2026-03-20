@@ -1,10 +1,10 @@
 import 'package:e_commerces/modules/home/controller/bottomnavigationbar_controller.dart';
+import 'package:e_commerces/modules/home/screen/home_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui';
 
 
-import 'home_screen.dart';
 import 'categories_screen.dart';
 
 class BottomnavigationbarScreen extends StatelessWidget {
@@ -15,7 +15,7 @@ class BottomnavigationbarScreen extends StatelessWidget {
   );
 
   final List<Widget> screens = [
-    HomeScreen(),
+    HomeScreenWidget(),
     CategoriesScreen(),
     Center(child: Text("Profile Screen")),
   ];
@@ -88,3 +88,4 @@ class BottomnavigationbarScreen extends StatelessWidget {
     );
   }
 }
+
