@@ -293,7 +293,7 @@ class HomeScreen extends StatelessWidget {
                             left: 15,
                             child: Obx(
                               () => InkWell(
-                                onTap: controllerIcon.toggleFavorite,
+                                onTap: controllerIcon.isFavorite.call,
                                 child: Icon(
                                   controllerIcon.isFavorite.value
                                       ? Icons.favorite
