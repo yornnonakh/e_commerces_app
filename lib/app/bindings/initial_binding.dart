@@ -1,5 +1,5 @@
 import 'package:e_commerces/modules/home/controller/hover_controller.dart';
-import 'package:e_commerces/modules/home/controller/product_controller.dart';
+import 'package:e_commerces/modules/home/controller/products_controller.dart';
 import 'package:get/get.dart';
 import '../../modules/auth/controller/auth_controller.dart';
 import '../../modules/home/controller/home_controller.dart';

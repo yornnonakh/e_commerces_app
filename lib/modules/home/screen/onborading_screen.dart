@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:e_commerces/app/config/app_assets.dart';
-import 'package:e_commerces/app/theme/app_colors.dart';
+import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/auth/screen/login_screen.dart';
 import 'package:e_commerces/modules/auth/screen/sign_up_screen.dart';
+import 'package:e_commerces/modules/home/screen/glass_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -30,11 +31,7 @@ class OnboradingScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 200, left: 20),
               child: Text(
                 'The Best App \n For Your \n Shopping',
-                style: TextStyle(
-                  color: AppColors.backgroundDark,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTextStyle.discoverTextStyle,
               ),
             ),
             Center(
@@ -50,34 +47,14 @@ class OnboradingScreen extends StatelessWidget {
                           onTap: () {
                             Get.to(Login());
                           },
-                          child: Container(
-                            width: 350,
+                          child: GlassCard(
+                            width: 300,
                             height: 60,
-                            decoration: BoxDecoration(
-                              // ignore: deprecated_member_use
-                              color: AppColors.backgroundLight.withOpacity(0.2),
-                              borderRadius: BorderRadius.circular(20),
-                              border: Border.all(
-                                // ignore: deprecated_member_use
-                                color: AppColors.backgroundLight.withOpacity(0.3),
-                                width: 1.5,
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  // ignore: deprecated_member_use
-                                  color: AppColors.backgroundDark.withOpacity(0.1),
-                                  blurRadius: 10,
-                                  offset: const Offset(0, 6),
-                                ),
-                              ],
-                            ),
-                            alignment: Alignment.center,
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
-                                color: AppColors.backgroundDark,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                            imagePath: '',
+                            child: Center(
+                              child: Text(
+                                'Sign In',
+                                style: AppTextStyle.buttonTextStyle,
                               ),
                             ),
                           ),
@@ -85,20 +62,14 @@ class OnboradingScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  const SizedBox(height: 10),
-
+                  SizedBox(height: 10),
                   InkWell(
                     onTap: () {
                       Get.to(SignUpScreen());
                     },
                     child: Text(
                       'create an account',
-                      style: TextStyle(
-                        color: AppColors.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+                      style: AppTextStyle.categoryTextStyle,
                     ),
                   ),
                 ],
