@@ -1,11 +1,7 @@
-
-final List<String> slideText = [
-
-];
 class ProductModel {
   final String name;
   final double price;
-  final String image; // path from AppAssets
+  final String image; 
 
   ProductModel({
     required this.name,

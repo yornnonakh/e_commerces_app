@@ -1,6 +1,7 @@
 class AppAssets {
   static const productsAll = [];
   // Images
+  static const logo = 'assets/images/logo.jpg';
   static const backgroundcover = 'assets/images/background_cover.jpg';
   static const onborading = 'assets/images/onborading.jpg';
   static const slasph = 'assets/images/slasph_screen.jpg';
@@ -16,7 +17,6 @@ class AppAssets {
   static const productPopular = 'assets/images/products_popular/IDA000.jpg';
 
   static String? get icons => null;
-
   static Null get coverSlide => null;
 }
 
@@ -35,49 +35,11 @@ class AppAssetsCover {
   ];
 }
 
-// class AppIcons
 class AppIcons {
   static const icons = 'assets/icons/shopping_cart.webp';
 }
 
-class AppAssetsProductPopular {
-  static const productPopular = [
-    'assets/images/products_popular/IDA000.jpg',
-    'assets/images/products_popular/IDH000.jpg',
-    'assets/images/products_popular/IDI000.jpg',
-    'assets/images/products_popular/IDJ000.jpg',
-    'assets/images/products_popular/IDM000.jpg',
-  ];
-}
-
-class AppAssetsProductLates {
-  static const productLates = [
-    'assets/images/products_latest/IDC001.jpg',
-    'assets/images/products_latest/IDG000.jpg',
-    'assets/images/products_latest/IDL000.jpg',
-    'assets/images/products_latest/IDZ002.jpg',
-    'assets/images/products_latest/IDE000.jpg',
-  ];
-}
-
 class AppAsset {
-  // BACKGROUND
   static const String backgroundcover = 'assets/images/background.png';
-
-  // ICONS
   static const String icons = 'assets/icons/shopping_cart.webp';
-
-  // SLIDESHOW IMAGES
-  static const List<String> coverSlide = [
-    'assets/images/products_latest/IDC001.jpg',
-    'assets/images/products_latest/IDE000.jpg',
-    'assets/images/products_latest/IDG000.jpg',
-  ];
-
-  // EXAMPLE PRODUCT IMAGES
-  static const List<String> productImages = [
-    'assets/images/products_latest/IDC000.jpg',
-    'assets/images/products_latest/IDE000.jpg',
-    'assets/images/products_latest/IDG000.jpg',
-  ];
 }
