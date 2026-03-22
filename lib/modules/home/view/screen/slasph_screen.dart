@@ -1,5 +1,5 @@
 import 'package:e_commerces/app/config/app_assets.dart';
-import 'package:e_commerces/modules/home/screen/onborading_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/onborading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

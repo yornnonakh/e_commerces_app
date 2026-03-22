@@ -30,6 +30,7 @@ flutter:
         - asset: assets/fonts/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto-Bold.ttf
   assets:
+    - assets/images/latest_products_detail/
     - assets/images/cover_slide/
     - assets/images/products_latest/
     - assets/images/products_popular/

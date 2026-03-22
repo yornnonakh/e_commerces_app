@@ -18,6 +18,8 @@ class AppAssets {
 
   static String? get icons => null;
   static Null get coverSlide => null;
+
+  static get latestProductsDetail => null;
 }
 
 class AppAssetsCover {
@@ -32,6 +34,18 @@ class AppAssetsCover {
     'assets/images/cover_slide/ID008.jpg',
     'assets/images/cover_slide/ID009.jpg',
     'assets/images/cover_slide/ID010.jpg',
+  ];
+}
+class AppAssetsLatestProducts {
+  static const latestProductsDetail = [
+    'assets/images/latest_products_detail/IDC000.jpg',
+    'assets/images/latest_products_detail/IDC002.jpg',
+    'assets/images/latest_products_detail/IDC002.jpg',
+    'assets/images/latest_products_detail/IDC003.jpg',
+    'assets/images/latest_products_detail/IDC004.jpg',
+    'assets/images/latest_products_detail/IDC005.jpg',
+    'assets/images/latest_products_detail/IDC006.jpg',
+    'assets/images/latest_products_detail/IDC007.jpg',
   ];
 }
 

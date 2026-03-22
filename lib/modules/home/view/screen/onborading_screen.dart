@@ -4,7 +4,7 @@ import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/auth/screen/login_screen.dart';
 import 'package:e_commerces/modules/auth/screen/sign_up_screen.dart';
-import 'package:e_commerces/modules/home/screen/glass_card.dart';
+import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

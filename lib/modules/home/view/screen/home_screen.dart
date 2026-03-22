@@ -1,16 +1,18 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
-import 'package:e_commerces/modules/home/screen/categories_screen.dart';
-import 'package:e_commerces/modules/home/screen/glass_card.dart';
+import 'package:e_commerces/modules/home/model/products_model.dart';
+import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
+import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 
-import '../controller/products_controller.dart';
+import '../../controller/products_controller.dart';
 
-class HomeScreenWidget extends StatelessWidget {
-  HomeScreenWidget({super.key});
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
   final controller = Get.find<ProductController>();
 
@@ -22,7 +24,6 @@ class HomeScreenWidget extends StatelessWidget {
   Widget _buildBody() {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
         image: DecorationImage(
           image: AssetImage(AppAssets.backgroundcover),
           fit: BoxFit.cover,
@@ -40,7 +41,7 @@ class HomeScreenWidget extends StatelessWidget {
             SizedBox(height: 8),
             _buildSectionTitle("The Popular"),
             _buildPopularList(),
-            _buildSectionTitle("The Lates"),
+            _buildSectionTitle("The Latest"),
             _buildLatestList(),
           ],
         ),
@@ -65,21 +66,23 @@ class HomeScreenWidget extends StatelessWidget {
           ),
           Row(
             children: [
-              Obx(
-                () => Stack(
+              Obx(() {
+                final favCount = controller.favoriteProducts.length;
+                return Stack(
                   children: [
                     IconButton(
                       onPressed: () => Get.to(CategoriesScreen()),
                       icon: Image.asset(AppAsset.icons, width: 55),
                     ),
-                    Positioned(
-                      right: 6,
-                      top: 6,
-                      child: _buildBadge(controller.favoriteList.length),
-                    ),
+                    if (favCount > 0)
+                      Positioned(
+                        right: 6,
+                        top: 6,
+                        child: _buildBadge(favCount),
+                      ),
                   ],
-                ),
-              ),
+                );
+              }),
             ],
           ),
         ],
@@ -109,10 +112,9 @@ class HomeScreenWidget extends StatelessWidget {
               (imagePath) => Padding(
                 padding: const EdgeInsets.only(left: 8),
                 child: GlassCard(
-                  width: 300, // adjust as needed
-                  height: 180, // adjust as needed
-                  imagePath:
-                      imagePath, // optional if you want a background image
+                  width: 300,
+                  height: 180,
+                  imagePath: imagePath,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),
                     child: Image.asset(imagePath, fit: BoxFit.cover),
@@ -140,7 +142,7 @@ class HomeScreenWidget extends StatelessWidget {
             imagePath: '',
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
                   categories[index],
                   style: AppTextStyle.categoryTextStyle,
@@ -163,23 +165,23 @@ class HomeScreenWidget extends StatelessWidget {
     );
   }
 
+  // ----------------- Popular List -----------------
   Widget _buildPopularList() {
     return Obx(
       () => SizedBox(
         height: 280,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
-          itemCount: controller.productsLates.length,
+          itemCount: controller.productsPopular.length,
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          itemBuilder: (context, index) => _buildPopularItem(index),
+          itemBuilder: (context, index) =>
+              _buildPopularItem(controller.productsPopular[index]),
         ),
       ),
     );
   }
 
-  Widget _buildPopularItem(int index) {
-    final product = controller.productsLates[index];
-
+  Widget _buildPopularItem(ProductModel product) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: GlassCard(
@@ -190,7 +192,6 @@ class HomeScreenWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// IMAGE
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -201,43 +202,25 @@ class HomeScreenWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                /// NAME
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    product.name,
-                    style: const TextStyle(color: Colors.white),
-                  ),
-                ),
-
-                /// PRICE + ADD TO CART
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "\$${product.price}",
-                        style: TextStyle(color: AppColors.cyan),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(product.name, style: AppTextStyle.categoryTextStyle),
+                          Text("\$${product.price}", style: AppTextStyle.categoryTextStyle),
+                        ],
                       ),
-
-                      /// ADD TO CART BUTTON
                       GestureDetector(
-                        onTap: () {
-                          controller.addToCart(product);
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.add_shopping_cart,
-                            color: Colors.white,
-                            size: 18,
-                          ),
+                        onTap: () => Get.to(() => ProductDetail(product: product)),
+                        child: GlassCard(
+                          width: 50,
+                          height: 50,
+                          imagePath: '',
+                          child: Icon(Icons.add_shopping_cart, color: AppColors.lightBlue, size: 22),
                         ),
                       ),
                     ],
@@ -245,35 +228,28 @@ class HomeScreenWidget extends StatelessWidget {
                 ),
               ],
             ),
-
-            /// ❤️ FAVORITE BUTTON (TOP RIGHT)
             Positioned(
               top: 10,
-              right: 10,
+              left: 10,
               child: Obx(() {
-                final isFav = controller.isFavorite(index);
-
+                final isFav = controller.isFavorite(product);
                 return GestureDetector(
-                  onTap: () {
-                    controller.toggleFavorite(index);
-                  },
+                  onTap: () => controller.toggleFavorite(product),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: isFav
-                          ? Colors.red.withOpacity(0.8)
-                          : Colors.white.withOpacity(0.2),
+                          ? AppColors.lightBlue.withOpacity(0.8)
+                          : AppColors.backgroundLight.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
                     child: AnimatedScale(
                       scale: isFav ? 1.2 : 1.0,
                       duration: const Duration(milliseconds: 300),
-                      child: Icon(
-                        Icons.favorite,
-                        color: isFav ? Colors.white : Colors.white70,
-                        size: 18,
-                      ),
+                      child: Icon(Icons.favorite,
+                          color: isFav ? AppColors.backgroundLight : AppColors.lightBlue,
+                          size: 20),
                     ),
                   ),
                 );
@@ -285,21 +261,21 @@ class HomeScreenWidget extends StatelessWidget {
     );
   }
 
+  // ----------------- Latest List -----------------
   Widget _buildLatestList() {
     return Obx(
       () => ListView.builder(
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
-        itemCount: controller.productsLates.length,
+        itemCount: controller.productsLatest.length,
         padding: EdgeInsets.symmetric(vertical: 10),
-        itemBuilder: (context, index) => _buildLatestItem(index),
+        itemBuilder: (context, index) =>
+            _buildLatestItem(controller.productsLatest[index]),
       ),
     );
   }
 
-  Widget _buildLatestItem(int index) {
-    final productsPopular = controller.productsPopular[index];
-
+  Widget _buildLatestItem(ProductModel product) {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: GlassCard(
@@ -310,7 +286,7 @@ class HomeScreenWidget extends StatelessWidget {
             Expanded(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(productsPopular.image, fit: BoxFit.cover),
+                child: Image.asset(product.image, fit: BoxFit.cover),
               ),
             ),
             Expanded(
@@ -319,14 +295,8 @@ class HomeScreenWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      productsPopular.name,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "\$${productsPopular.price}",
-                      style: TextStyle(color: AppColors.cyan),
-                    ),
+                    Text(product.name, style: const TextStyle(color: Colors.white)),
+                    Text("\$${product.price}", style: TextStyle(color: AppColors.cyan)),
                   ],
                 ),
               ),
@@ -337,6 +307,7 @@ class HomeScreenWidget extends StatelessWidget {
     );
   }
 
+  // ----------------- Badge -----------------
   Widget _buildBadge(int count) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -347,14 +318,9 @@ class HomeScreenWidget extends StatelessWidget {
       ),
       constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
       child: Center(
-        child: Text(
-          count.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Text(count.toString(),
+            style: const TextStyle(
+                color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
       ),
     );
   }
