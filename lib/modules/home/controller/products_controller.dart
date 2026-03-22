@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   final productsLates = <ProductModel>[].obs;
   final productsPopular = <ProductModel>[].obs;
-  final favoriteList = <int>[].obs;
-
+ final favoriteList = <int>[].obs;
+  final cartList = <ProductModel>[].obs;
   @override
   void onInit() {
     super.onInit();
@@ -55,15 +55,22 @@ class ProductController extends GetxController {
     ]);
   }
 
-  /// Check favorite
-  bool isFavorite(int index) => favoriteList.contains(index);
-
-  /// Toggle favorite
-  void toggleFavorite(int index) {
-    if (isFavorite(index)) {
+    void toggleFavorite(int index) {
+    if (favoriteList.contains(index)) {
       favoriteList.remove(index);
     } else {
       favoriteList.add(index);
     }
   }
+
+  bool isFavorite(int index) {
+    return favoriteList.contains(index);
+  }
+
+  void addToCart(ProductModel product) {
+    cartList.add(product);
+  }
+
+  int get cartCount => cartList.length;
+
 }
