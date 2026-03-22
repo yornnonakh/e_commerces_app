@@ -1,13 +1,13 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/screen/categories_screen.dart';
 import 'package:e_commerces/modules/home/screen/glass_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 
 import '../controller/products_controller.dart';
-import 'categories_screen.dart';
 
 class HomeScreenWidget extends StatelessWidget {
   HomeScreenWidget({super.key});
@@ -63,9 +63,24 @@ class HomeScreenWidget extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          IconButton(
-            onPressed: () => Get.to(CategoriesScreen()),
-            icon: Image.asset(AppAsset.icons, width: 55),
+          Row(
+            children: [
+              Obx(
+                () => Stack(
+                  children: [
+                    IconButton(
+                      onPressed: () => Get.to(CategoriesScreen()),
+                      icon: Image.asset(AppAsset.icons, width: 55),
+                    ),
+                    Positioned(
+                      right: 6,
+                      top: 6,
+                      child: _buildBadge(controller.favoriteList.length),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -163,39 +178,106 @@ class HomeScreenWidget extends StatelessWidget {
   }
 
   Widget _buildPopularItem(int index) {
-    final productsLates = controller.productsLates[index];
+    final product = controller.productsLates[index];
 
     return Padding(
       padding: const EdgeInsets.all(10),
       child: GlassCard(
-        width: 200,
+        width: 222,
         imagePath: '',
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  productsLates.image,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                /// IMAGE
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      product.image,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
                 ),
-              ),
+
+                /// NAME
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    product.name,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+
+                /// PRICE + ADD TO CART
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "\$${product.price}",
+                        style: TextStyle(color: AppColors.cyan),
+                      ),
+
+                      /// ADD TO CART BUTTON
+                      GestureDetector(
+                        onTap: () {
+                          controller.addToCart(product);
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.2),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            Icons.add_shopping_cart,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                productsLates.name,
-                style: const TextStyle(color: Colors.white),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "\$${productsLates.price}",
-                style: TextStyle(color: AppColors.cyan),
-              ),
+
+            /// ❤️ FAVORITE BUTTON (TOP RIGHT)
+            Positioned(
+              top: 10,
+              right: 10,
+              child: Obx(() {
+                final isFav = controller.isFavorite(index);
+
+                return GestureDetector(
+                  onTap: () {
+                    controller.toggleFavorite(index);
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: isFav
+                          ? Colors.red.withOpacity(0.8)
+                          : Colors.white.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: AnimatedScale(
+                      scale: isFav ? 1.2 : 1.0,
+                      duration: const Duration(milliseconds: 300),
+                      child: Icon(
+                        Icons.favorite,
+                        color: isFav ? Colors.white : Colors.white70,
+                        size: 18,
+                      ),
+                    ),
+                  ),
+                );
+              }),
             ),
           ],
         ),
@@ -250,6 +332,28 @@ class HomeScreenWidget extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBadge(int count) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.all(5),
+      decoration: const BoxDecoration(
+        color: Colors.red,
+        shape: BoxShape.circle,
+      ),
+      constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
+      child: Center(
+        child: Text(
+          count.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
