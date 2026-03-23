@@ -100,7 +100,7 @@ class ProductDetail extends StatelessWidget {
                               ),
                           ],
                         ),
-                        SizedBox(height: 5,),
+                        SizedBox(height: 5),
                         Text(
                           "Flywire cables help secure your feet and provide support when you tighten the laces, so you can stay stable.\n Nike Air technology absorbs impact cushioning with every step.",
                           style: AppTextStyle.paragrapTextStyle,
@@ -174,6 +174,9 @@ class ProductDetail extends StatelessWidget {
             ),
           ),
           // Product images
+          // Inside the ProductDetail widget, replace your image section with this:
+
+          // Product images
           Positioned(
             top: 100,
             left: 20,
@@ -181,13 +184,31 @@ class ProductDetail extends StatelessWidget {
             bottom: 500,
             child: Column(
               children: [
+                // Image display with smooth animation
                 Expanded(
                   child: Obx(() {
                     int index = controller.currentIndex.value;
                     if (index >= images!.length) index = 0;
-                    return Image.asset(images![index], fit: BoxFit.contain);
+
+                    return AnimatedSwitcher(
+                      duration: Duration(
+                        milliseconds: 300,
+                      ), // smooth transition
+                      transitionBuilder: (child, animation) {
+                        return FadeTransition(opacity: animation, child: child);
+                      },
+                      child: Image.asset(
+                        images![index],
+                        key: ValueKey<int>(index), // important for animation
+                        fit: BoxFit.contain,
+                      ),
+                    );
                   }),
                 ),
+
+                SizedBox(height: 10),
+
+                // Left/Right arrow buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
