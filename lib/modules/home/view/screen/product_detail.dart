@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
 
   ProductDetail({super.key, required this.product});
 
-  List<String> get images => product.images.isNotEmpty
+  List<String>? get images => product.images.isNotEmpty
       ? product.images
       : AppAssets.latestProductsDetail;
 
@@ -39,7 +39,9 @@ class ProductDetail extends StatelessWidget {
               width: 450,
               height: 920,
               decoration: BoxDecoration(
+                // ignore: deprecated_member_use
                 border: Border.all(color: AppColors.lightBlue.withOpacity(0.5)),
+                // ignore: deprecated_member_use
                 color: AppColors.lightBlue.withOpacity(0.10),
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(250),
@@ -74,7 +76,7 @@ class ProductDetail extends StatelessWidget {
                           height: 50,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 5,
+                            itemCount: 10,
                             itemBuilder: (context, index) {
                               return Padding(
                                 padding: const EdgeInsets.only(left: 5),
@@ -133,6 +135,7 @@ class ProductDetail extends StatelessWidget {
             decoration: BoxDecoration(
               // ignore: deprecated_member_use
               color: AppColors.lightBlue.withOpacity(0.10),
+              // ignore: deprecated_member_use
               border: Border.all(color: AppColors.lightBlue.withOpacity(0.5)),
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(250),
@@ -181,15 +184,15 @@ class ProductDetail extends StatelessWidget {
                 Expanded(
                   child: Obx(() {
                     int index = controller.currentIndex.value;
-                    if (index >= images.length) index = 0;
-                    return Image.asset(images[index], fit: BoxFit.contain);
+                    if (index >= images!.length) index = 0;
+                    return Image.asset(images![index], fit: BoxFit.contain);
                   }),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                      onPressed: () => controller.previousImage(images.length),
+                      onPressed: () => controller.previousImage(images!.length),
                       icon: GlassCard(
                         width: 40,
                         height: 40,
@@ -201,7 +204,7 @@ class ProductDetail extends StatelessWidget {
                       ),
                     ),
                     IconButton(
-                      onPressed: () => controller.nextImage(images.length),
+                      onPressed: () => controller.nextImage(images!.length),
                       icon: GlassCard(
                         width: 40,
                         height: 40,

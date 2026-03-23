@@ -19,7 +19,7 @@ class AppAssets {
   static String? get icons => null;
   static Null get coverSlide => null;
 
-  static get latestProductsDetail => null;
+  static Null get latestProductsDetail => null;
 }
 
 class AppAssetsCover {
