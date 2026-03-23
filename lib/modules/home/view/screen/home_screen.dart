@@ -4,6 +4,8 @@ import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
+import 'package:e_commerces/modules/home/view/widget/bottom_section_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -37,12 +39,13 @@ class HomeScreen extends StatelessWidget {
             SizedBox(height: 8),
             _buildSlideshow(),
             SizedBox(height: 8),
-            _buildCategory(),
+            CategoryWidget(),
             SizedBox(height: 8),
             _buildSectionTitle("The Popular"),
             _buildPopularList(),
             _buildSectionTitle("The Latest"),
             _buildLatestList(),
+            BottomWidget(),
           ],
         ),
       ),
@@ -127,34 +130,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategory() {
-    final categories = ['All', 'For men', 'For women', 'Running'];
-
-    return SizedBox(
-      height: 40,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        itemBuilder: (context, index) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 2),
-          child: GlassCard(
-            imagePath: '',
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Text(
-                  categories[index],
-                  style: AppTextStyle.categoryTextStyle,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 10),
@@ -185,7 +160,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10),
       child: GlassCard(
-        width: 222,
+        width: 225,
         imagePath: '',
         child: Stack(
           children: [
@@ -203,24 +178,38 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 8,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(product.name, style: AppTextStyle.categoryTextStyle),
-                          Text("\$${product.price}", style: AppTextStyle.categoryTextStyle),
+                          Text(
+                            product.name,
+                            style: AppTextStyle.categoryTextStyle,
+                          ),
+                          Text(
+                            "\$${product.price}",
+                            style: AppTextStyle.categoryTextStyle,
+                          ),
                         ],
                       ),
                       GestureDetector(
-                        onTap: () => Get.to(() => ProductDetail(product: product)),
+                        onTap: () =>
+                            Get.to(() => ProductDetail(product: product)),
                         child: GlassCard(
                           width: 50,
                           height: 50,
                           imagePath: '',
-                          child: Icon(Icons.add_shopping_cart, color: AppColors.lightBlue, size: 22),
+                          child: Icon(
+                            Icons.add_shopping_cart,
+                            color: AppColors.lightBlue,
+                            size: 22,
+                          ),
                         ),
                       ),
                     ],
@@ -240,16 +229,22 @@ class HomeScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: isFav
+                          // ignore: deprecated_member_use
                           ? AppColors.lightBlue.withOpacity(0.8)
+                          // ignore: deprecated_member_use
                           : AppColors.backgroundLight.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
                     child: AnimatedScale(
                       scale: isFav ? 1.2 : 1.0,
                       duration: const Duration(milliseconds: 300),
-                      child: Icon(Icons.favorite,
-                          color: isFav ? AppColors.backgroundLight : AppColors.lightBlue,
-                          size: 20),
+                      child: Icon(
+                        Icons.favorite,
+                        color: isFav
+                            ? AppColors.backgroundLight
+                            : AppColors.lightBlue,
+                        size: 20,
+                      ),
                     ),
                   ),
                 );
@@ -295,8 +290,14 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(product.name, style: const TextStyle(color: Colors.white)),
-                    Text("\$${product.price}", style: TextStyle(color: AppColors.cyan)),
+                    Text(
+                      product.name,
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "\$${product.price}",
+                      style: TextStyle(color: AppColors.cyan),
+                    ),
                   ],
                 ),
               ),
@@ -318,9 +319,14 @@ class HomeScreen extends StatelessWidget {
       ),
       constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
       child: Center(
-        child: Text(count.toString(),
-            style: const TextStyle(
-                color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold)),
+        child: Text(
+          count.toString(),
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 10,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

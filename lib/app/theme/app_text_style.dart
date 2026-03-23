@@ -37,4 +37,10 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     fontFamily: 'Roboto',
   );
+  static const paragrapTextStyle = TextStyle(
+    fontSize: 15,
+    color: AppColors.backgroundLight,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'Robot'
+  );
 }
