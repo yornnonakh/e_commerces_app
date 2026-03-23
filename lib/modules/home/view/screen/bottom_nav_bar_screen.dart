@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/modules/home/controller/bottomnavigationbar_controller.dart';
-import 'package:e_commerces/modules/home/screen/glass_card.dart';
-import 'package:e_commerces/modules/home/screen/home_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/home_screen.dart';
+import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,7 @@ class BottomnavigationbarScreen extends StatelessWidget {
   );
 
   final List<Widget> screens = [
-    HomeScreenWidget(),
+    HomeScreen(),
     CategoriesScreen(),
     const Center(child: Text("Profile Screen")),
   ];

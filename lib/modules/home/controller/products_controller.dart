@@ -1,11 +1,12 @@
-import 'package:e_commerces/modules/home/model/home_model.dart';
+import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
-  final productsLates = <ProductModel>[].obs;
+  final productsLatest = <ProductModel>[].obs;
   final productsPopular = <ProductModel>[].obs;
- final favoriteList = <int>[].obs;
+  final favoriteProducts = <ProductModel>[].obs;
   final cartList = <ProductModel>[].obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -13,64 +14,152 @@ class ProductController extends GetxController {
     _loadPopularProducts();
   }
 
-  /// Latest Products
   void _loadProducts() {
-    productsLates.addAll([
+    productsLatest.addAll([
       ProductModel(
         name: "Shoe 1",
         price: 50,
         image: "assets/images/products_latest/IDC001.jpg",
-      ),
-      ProductModel(
-        name: "Shoe 2",
-        price: 60,
-        image: "assets/images/products_latest/IDE000.jpg",
+        images: [
+          "assets/images/products_latest/IDC001.jpg",
+          "assets/images/products_latest/IDC002.jpg",
+          "assets/images/products_latest/IDC003.jpg",
+        ],
       ),
       ProductModel(
         name: "Shoe 3",
-        price: 70,
-        image: "assets/images/products_latest/IDG000.jpg",
+        price: 50,
+        image: "assets/images/products_latest/IDE000.jpg",
+        images: [
+          "assets/images/products_latest/IDE000.jpg",
+          "assets/images/products_latest/IDC002.jpg",
+          "assets/images/products_latest/IDC003.jpg",
+        ],
       ),
+      ProductModel(
+        name: "Shoe 3",
+        price: 50,
+        image: "assets/images/products_latest/IDG000.jpg",
+        images: [
+          "assets/images/products_latest/IDG000.jpg",
+          "assets/images/products_latest/IDC002.jpg",
+          "assets/images/products_latest/IDC003.jpg",
+        ],
+      ),
+      ProductModel(
+        name: "Shoe 3",
+        price: 50,
+        image: "assets/images/products_latest/IDL000.jpg",
+        images: [
+          "assets/images/products_latest/IDL000.jpg",
+          "assets/images/products_latest/IDC002.jpg",
+          "assets/images/products_latest/IDC003.jpg",
+        ],
+      ),
+      ProductModel(
+        name: "Shoe 3",
+        price: 50,
+        image: "assets/images/products_latest/IDZ000.jpg",
+        images: [
+          "assets/images/products_latest/IDZ000.jpg",
+          "assets/images/products_latest/IDC002.jpg",
+          "assets/images/products_latest/IDC003.jpg",
+        ],
+      ),
+      // Add more products
     ]);
   }
 
-  /// Popular Products
   void _loadPopularProducts() {
     productsPopular.addAll([
       ProductModel(
         name: "Popular Shoe 1",
-        price: 80,
+        price: 300,
         image: "assets/images/products_popular/IDA000.jpg",
+        images: [
+          "assets/images/products_popular/IDA000.jpg",
+          "assets/images/products_popular/IDA001.jpg",
+          "assets/images/products_popular/IDA002.jpg",
+          "assets/images/products_popular/IDA003.jpg",
+          "assets/images/products_popular/IDA004.jpg",
+          "assets/images/products_popular/IDA005.jpg",
+          "assets/images/products_popular/IDA006.jpg",
+          "assets/images/products_popular/IDA007.jpg",
+        ],
       ),
       ProductModel(
-        name: "Popular Shoe 2",
-        price: 90,
+        name: "Popular Shoe 1",
+        price: 300,
         image: "assets/images/products_popular/IDH000.jpg",
+        images: [
+          "assets/images/products_popular/IDH000.jpg",
+          "assets/images/products_popular/IDH001.jpg",
+          "assets/images/products_popular/IDH002.jpg",
+          "assets/images/products_popular/IDH003.jpg",
+          "assets/images/products_popular/IDH004.jpg",
+          "assets/images/products_popular/IDH005.jpg",
+          "assets/images/products_popular/IDH006.jpg",
+          "assets/images/products_popular/IDH007.jpg",
+          "assets/images/products_popular/IDH008.jpg",
+        ],
       ),
       ProductModel(
-        name: "Popular Shoe 3",
-        price: 100,
-        image: "assets/images/products_popular/IDJ000.jpg",
+        name: "Popular Shoe 1",
+        price: 300,
+        image: "assets/images/products_popular/IDI000.jpg",
+        images: [
+          "assets/images/products_popular/IDI000.jpg",
+          "assets/images/products_popular/IDI001.jpg",
+          "assets/images/products_popular/IDI002.jpg",
+          "assets/images/products_popular/IDI004.jpg",
+          "assets/images/products_popular/IDI005.jpg",
+          "assets/images/products_popular/IDI006.jpg",
+          "assets/images/products_popular/IDI007.jpg",
+        ],
       ),
+      ProductModel(
+        name: "Popular Shoe 1",
+        price: 300,
+        image: "assets/images/products_popular/IDM000.jpg",
+        images: [
+          "assets/images/products_popular/IDM000.jpg",
+          "assets/images/products_popular/IDM001.jpg",
+          "assets/images/products_popular/IDM003.jpg",
+          "assets/images/products_popular/IDM004.jpg",
+          "assets/images/products_popular/IDM005.jpg",
+          "assets/images/products_popular/IDM006.jpg",
+          "assets/images/products_popular/IDM007.jpg",
+          "assets/images/products_popular/IDM008.jpg",
+          "assets/images/products_popular/IDM009.jpg",
+        ],
+      ),
+      ProductModel(
+        name: "Popular Shoe 1",
+        price: 200,
+        image: "assets/images/products_popular/IDJ000.jpg",
+        images: [
+          "assets/images/products_popular/IDJ000.jpg",
+          "assets/images/products_popular/IDJ001.jpg",
+          "assets/images/products_popular/IDJ002.jpg",
+          "assets/images/products_popular/IDJ003.jpg",
+          "assets/images/products_popular/IDJ004.jpg",
+          "assets/images/products_popular/IDJ005.jpg",
+          "assets/images/products_popular/IDJ007.jpg",
+        ],
+      ),
+      // Add more products
     ]);
   }
 
-    void toggleFavorite(int index) {
-    if (favoriteList.contains(index)) {
-      favoriteList.remove(index);
+  void toggleFavorite(ProductModel product) {
+    if (favoriteProducts.contains(product)) {
+      favoriteProducts.remove(product);
     } else {
-      favoriteList.add(index);
+      favoriteProducts.add(product);
     }
   }
 
-  bool isFavorite(int index) {
-    return favoriteList.contains(index);
-  }
+  void addToCart(ProductModel product) => cartList.add(product);
 
-  void addToCart(ProductModel product) {
-    cartList.add(product);
-  }
-
-  int get cartCount => cartList.length;
-
+  bool isFavorite(ProductModel product) => favoriteProducts.contains(product);
 }
