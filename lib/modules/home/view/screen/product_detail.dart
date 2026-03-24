@@ -2,6 +2,7 @@ import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/controller/products_detail_controller.dart';
+import 'package:e_commerces/modules/home/controller/size_controller.dart';
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -72,20 +73,42 @@ class ProductDetail extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 8),
+                        Text('Size', style: 
+                        AppTextStyle.buttonTextStyle,),
                         SizedBox(
                           height: 50,
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            itemCount: 10,
+                            itemCount: 5,
                             itemBuilder: (context, index) {
+                              final controller = Get.put(SizeController());
                               return Padding(
                                 padding: const EdgeInsets.only(left: 5),
-                                child: GlassCard(
-                                  width: 50,
-                                  height: 50,
-                                  imagePath: '',
-                                  child: Center(child: Text('${index + 40}')),
-                                ),
+                                child: Obx(() {
+                                  final isSelected =
+                                      controller.selectedIndex.value == index;
+                                  return GestureDetector(
+                                    onTap: () => controller.selectItem(index),
+                                    child: Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.lightBlue.withOpacity(0.3)
+                                        ),
+                                        color: isSelected
+                                            ? AppColors.danger
+                                            : AppColors.lightBlue.withOpacity(
+                                                0.15,
+                                              ),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Center(
+                                        child: Text('${index + 40}'),
+                                      ),
+                                    ),
+                                  );
+                                }),
                               );
                             },
                           ),
@@ -98,9 +121,11 @@ class ProductDetail extends StatelessWidget {
                                 color: AppColors.danger,
                                 size: 24,
                               ),
+                              Text('5.0 Rating',style: AppTextStyle.categoryTextStyle,)
                           ],
                         ),
                         SizedBox(height: 5),
+                        Text('Detail',style: AppTextStyle.heading,),
                         Text(
                           "Flywire cables help secure your feet and provide support when you tighten the laces, so you can stay stable.\n Nike Air technology absorbs impact cushioning with every step.",
                           style: AppTextStyle.paragrapTextStyle,
@@ -191,9 +216,7 @@ class ProductDetail extends StatelessWidget {
                     if (index >= images!.length) index = 0;
 
                     return AnimatedSwitcher(
-                      duration: Duration(
-                        milliseconds: 300,
-                      ), // smooth transition
+                      duration: Duration(milliseconds: 0), // smooth transition
                       transitionBuilder: (child, animation) {
                         return FadeTransition(opacity: animation, child: child);
                       },
