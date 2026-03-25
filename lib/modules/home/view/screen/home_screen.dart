@@ -207,7 +207,7 @@ class HomeScreen extends StatelessWidget {
                           imagePath: '',
                           child: Icon(
                             Icons.add_shopping_cart,
-                            color: AppColors.lightBlue,
+                            color: AppColors.backgroundLight,
                             size: 22,
                           ),
                         ),
@@ -230,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: isFav
                           // ignore: deprecated_member_use
-                          ? AppColors.lightBlue.withOpacity(0.8)
+                          ? AppColors.danger.withOpacity(0.8)
                           // ignore: deprecated_member_use
                           : AppColors.backgroundLight.withOpacity(0.2),
                       shape: BoxShape.circle,
@@ -273,37 +273,111 @@ class HomeScreen extends StatelessWidget {
   Widget _buildLatestItem(ProductModel product) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: GlassCard(
-        width: double.infinity,
-        imagePath: '',
-        child: Row(
-          children: [
-            Expanded(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(product.image, fit: BoxFit.cover),
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.name,
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "\$${product.price}",
-                      style: TextStyle(color: AppColors.cyan),
-                    ),
-                  ],
+      child: Stack(
+        children: [
+          GlassCard(
+            width: double.infinity,
+            imagePath: '',
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 200,
+                  height: 188,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(product.image, fit: BoxFit.cover),
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: SizedBox(
+                    width: 200,
+                    height: 188,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 20,
+                      children: [
+                        Text(
+                          product.name,
+                          style: AppTextStyle.featureTextStyle,
+                        ),
+                        Text(
+                          'Good products from original branch nike, new arrivied ', style: AppTextStyle.paragrapTextStyle,
+                        ),
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Spacer(),
+                            Text(
+                              "\$${product.price}",
+                              style: AppTextStyle.buttonTextStyle,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(ProductDetail(product: product));
+                              },
+                              child: GlassCard(
+                                imagePath: '',
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_cart,
+                                        color: AppColors.backgroundLight,
+                                      ),
+                                      Text(
+                                        'Add to cart',
+                                        style: AppTextStyle.paragrapTextStyle,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Positioned(
+            top: 10,
+            left: 10,
+            child: Obx(() {
+              final isFav = controller.isFavorite(product);
+              return GestureDetector(
+                onTap: () => controller.toggleFavorite(product),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: isFav
+                        // ignore: deprecated_member_use
+                        ? AppColors.danger.withOpacity(0.8)
+                        // ignore: deprecated_member_use
+                        : AppColors.backgroundLight.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: AnimatedScale(
+                    scale: isFav ? 1.2 : 1.0,
+                    duration: const Duration(milliseconds: 300),
+                    child: Icon(
+                      Icons.favorite,
+                      color: isFav
+                          ? AppColors.backgroundLight
+                          : AppColors.lightBlue,
+                      size: 20,
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ],
       ),
     );
   }
@@ -314,19 +388,12 @@ class HomeScreen extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(5),
       decoration: const BoxDecoration(
-        color: Colors.red,
+        color: AppColors.danger,
         shape: BoxShape.circle,
       ),
       constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
       child: Center(
-        child: Text(
-          count.toString(),
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 10,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        child: Text(count.toString(), style: AppTextStyle.paragrapTextStyle),
       ),
     );
   }

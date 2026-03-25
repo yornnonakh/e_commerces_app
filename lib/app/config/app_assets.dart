@@ -55,5 +55,5 @@ class AppIcons {
 
 class AppAsset {
   static const String backgroundcover = 'assets/images/background.png';
-  static const String icons = 'assets/icons/shopping_cart.webp';
+  static const String icons = 'assets/icons/shopping_cart.png';
 }

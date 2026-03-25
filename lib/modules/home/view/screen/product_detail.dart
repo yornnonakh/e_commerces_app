@@ -161,7 +161,7 @@ class ProductDetail extends StatelessWidget {
               // ignore: deprecated_member_use
               color: AppColors.lightBlue.withOpacity(0.10),
               // ignore: deprecated_member_use
-              border: Border.all(color: AppColors.lightBlue.withOpacity(0.5)),
+              border: Border.all(color: AppColors.backgroundLight.withOpacity(0.5)),
               borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(250),
                 bottomRight: Radius.circular(250),
