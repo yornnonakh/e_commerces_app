@@ -4,11 +4,12 @@ import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
+import 'package:e_commerces/modules/home/view/widget/bage_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/bottom_section_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 
 import '../../controller/products_controller.dart';
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget {
             _buildHeader(),
             _buildDiscover(),
             SizedBox(height: 8),
-            _buildSlideshow(),
+            SlideShowWidget(),
             SizedBox(height: 8),
             CategoryWidget(),
             SizedBox(height: 8),
@@ -81,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                       Positioned(
                         right: 6,
                         top: 6,
-                        child: _buildBadge(favCount),
+                        child: BadgeWidget(count: 5),
                       ),
                   ],
                 );
@@ -99,33 +100,6 @@ class HomeScreen extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text("Discover", style: AppTextStyle.heading),
-      ),
-    );
-  }
-
-  Widget _buildSlideshow() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: ImageSlideshow(
-        indicatorColor: AppColors.lightBlue,
-        autoPlayInterval: 3000,
-        isLoop: true,
-        children: AppAssetsCover.coverSlide
-            .map(
-              (imagePath) => Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: GlassCard(
-                  width: 300,
-                  height: 180,
-                  imagePath: imagePath,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(imagePath, fit: BoxFit.cover),
-                  ),
-                ),
-              ),
-            )
-            .toList(),
       ),
     );
   }
@@ -302,7 +276,8 @@ class HomeScreen extends StatelessWidget {
                           style: AppTextStyle.featureTextStyle,
                         ),
                         Text(
-                          'Good products from original branch nike, new arrivied ', style: AppTextStyle.paragrapTextStyle,
+                          'Good products from original branch nike, new arrivied ',
+                          style: AppTextStyle.paragrapTextStyle,
                         ),
                         Row(
                           spacing: 5,
@@ -378,22 +353,6 @@ class HomeScreen extends StatelessWidget {
             }),
           ),
         ],
-      ),
-    );
-  }
-
-  // ----------------- Badge -----------------
-  Widget _buildBadge(int count) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      padding: const EdgeInsets.all(5),
-      decoration: const BoxDecoration(
-        color: AppColors.danger,
-        shape: BoxShape.circle,
-      ),
-      constraints: const BoxConstraints(minWidth: 18, minHeight: 18),
-      child: Center(
-        child: Text(count.toString(), style: AppTextStyle.paragrapTextStyle),
       ),
     );
   }
