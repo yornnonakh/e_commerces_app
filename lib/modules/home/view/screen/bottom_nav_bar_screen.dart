@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/modules/home/controller/bottomnavigationbar_controller.dart';
 import 'package:e_commerces/modules/home/view/screen/home_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/profile_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/search_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,9 +20,15 @@ class BottomnavigationbarScreen extends StatelessWidget {
   final List<Widget> screens = [
     HomeScreen(),
     CategoriesScreen(),
-    const Center(child: Text("Profile Screen")),
+    ProfileScreen(),
+    SearchScreen(),
   ];
-  final List<IconData> icons = [Icons.home, Icons.shop, Icons.person];
+  final List<IconData> icons = [
+    Icons.home,
+    Icons.shop,
+    Icons.person,
+    Icons.search,
+  ];
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
 import 'package:e_commerces/modules/home/view/widget/bage_widget.dart';
-import 'package:e_commerces/modules/home/view/widget/bottom_section_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/bottom_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
