@@ -1,4 +1,5 @@
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/auth/screen/sign_up_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/bottom_nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,6 @@ class Login extends StatelessWidget {
 
   final TextEditingController emailcontroller = TextEditingController();
   final TextEditingController passwordcontroller = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,9 @@ class Login extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.all(10),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.back();
+            },
             icon: const Icon(
               Icons.arrow_circle_left_outlined,
               size: 35,
@@ -149,7 +151,9 @@ class Login extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(SignUpScreen());
+                    },
                     child: const Text(
                       "Sign up",
                       style: TextStyle(color: Color.fromARGB(232, 5, 213, 203)),

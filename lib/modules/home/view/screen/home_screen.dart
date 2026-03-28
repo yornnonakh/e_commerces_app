@@ -17,7 +17,7 @@ import '../../controller/products_controller.dart';
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
-  final controller = Get.find<ProductController>();
+  final controller = Get.find<ProductsController>();
 
   @override
   Widget build(BuildContext context) {

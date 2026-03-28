@@ -1,7 +1,7 @@
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:get/get.dart';
 
-class ProductController extends GetxController {
+class ProductsController extends GetxController {
   final productsLatest = <ProductModel>[].obs;
   final productsPopular = <ProductModel>[].obs;
   final favoriteProducts = <ProductModel>[].obs;
