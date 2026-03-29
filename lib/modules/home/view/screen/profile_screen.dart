@@ -1,17 +1,26 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/controller/user_controller.dart';
+import 'package:e_commerces/modules/home/view/widget/edit_profile_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/my_order_screen.dart';
+import 'package:e_commerces/modules/home/view/widget/settings_screen.dart';
+import 'package:e_commerces/modules/home/view/widget/wish_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // 🔹 Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -20,6 +29,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
+
           SafeArea(
             child: Column(
               children: [
@@ -28,11 +38,15 @@ class ProfileScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Profile", style: AppTextStyle.categoryTextStyle),
                       IconButton(
-                        onPressed: () {
-                          // Get.to(HomeScreen());
-                        },
+                        onPressed: () => Get.back(),
+                        icon: const Icon(
+                          Icons.arrow_back_ios,
+                          color: AppColors.backgroundLight,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Get.to(() => const SettingsScreen()),
                         icon: Icon(
                           Icons.settings,
                           color: AppColors.backgroundLight,
@@ -41,28 +55,53 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 30),
-                CircleAvatar(
-                  radius: 55,
-                  backgroundColor: AppColors.lightBlue,
-                  child: CircleAvatar(
-                    radius: 50,
-                    // backgroundImage: AssetImage(AppAssets.), // add your image
+
+                const SizedBox(height: 30),
+
+                // 🔹 Profile Avatar
+                Obx(
+                  () => CircleAvatar(
+                    radius: 55,
+                    backgroundColor: AppColors.lightBlue,
+                    backgroundImage: userController.avatarPath.value.isNotEmpty
+                        ? AssetImage(userController.avatarPath.value)
+                              as ImageProvider
+                        : null,
+                    child: userController.avatarPath.value.isEmpty
+                        ? const Icon(
+                            Icons.person,
+                            size: 50,
+                            color: Colors.white,
+                          )
+                        : null,
                   ),
                 ),
-                SizedBox(height: 15),
-                Text("User Profile", style: AppTextStyle.heading),
-                SizedBox(height: 5),
-                Text(
-                  "user@example.com",
-                  style: TextStyle(color: AppColors.backgroundLight),
+
+                const SizedBox(height: 15),
+
+                // 🔹 User Info
+                Obx(
+                  () => Text(
+                    userController.name.value,
+                    style: AppTextStyle.heading,
+                  ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 5),
+                Obx(
+                  () => Text(
+                    userController.email.value,
+                    style: TextStyle(color: AppColors.backgroundLight),
+                  ),
+                ),
+
+                const SizedBox(height: 30),
+
+                // 🔹 Menu Items
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(15),
                     child: GlassCard(
-                      width: 450,
+                      width: double.infinity,
                       imagePath: '',
                       child: Column(
                         children: [
@@ -86,29 +125,50 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildItem(IconData icon, String title) {
     return Padding(
-      padding: EdgeInsets.only(right: 15, left: 15, top: 15),
+      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
       child: Center(
         child: GlassCard(
           height: 62,
           imagePath: '',
-          child: Row(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 15),
-                child: Icon(icon, color: AppColors.backgroundLight),
-              ),
-              SizedBox(width: 15),
-              Text(title, style: AppTextStyle.paragrapTextStyle),
-              Spacer(),
-              Padding(
-                padding: EdgeInsets.only(right: 15),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  size: 16,
-                  color: AppColors.backgroundLight,
+          child: InkWell(
+            onTap: () {
+              switch (title) {
+                case "Edit Profile":
+                  Get.to(() => const EditProfileScreen());
+                  break;
+                case "My Orders":
+                  Get.to(() => const MyOrderScreen());
+                  break;
+                case "Wishlist":
+                  Get.to(() => const WishListScreen());
+                  break;
+                case "Settings":
+                  Get.to(() => const SettingsScreen());
+                  break;
+                case "Logout":
+                  // TODO: Implement logout functionality
+                  break;
+              }
+            },
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Icon(icon, color: AppColors.backgroundLight),
                 ),
-              ),
-            ],
+                const SizedBox(width: 15),
+                Text(title, style: AppTextStyle.paragrapTextStyle),
+                const Spacer(),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 16,
+                    color: AppColors.backgroundLight,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
