@@ -1,14 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
-  var isLoading = false.obs;
+  static AuthController instance = Get.find();
 
-  void login(String email, String password) {
-    isLoading.value = true;
+  Rx<User?> firebaseUser = Rx<User?>(null);
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    Future.delayed(const Duration(seconds: 2), () {
-      isLoading.value = false;
-      Get.offAllNamed('/home');
-    });
+  @override
+  void onInit() {
+    super.onInit();
+    // Bind stream to listen to auth state
+    firebaseUser.bindStream(_auth.authStateChanges());
+  }
+
+  Future<void> login(String email, String password) async {
+    try {
+      await _auth.signInWithEmailAndPassword(email: email, password: password);
+      Get.snackbar("Success", "Logged in successfully");
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
+  }
+
+  Future<void> logout() async {
+    await _auth.signOut();
+  }
+
+  Future<void> signUp(String email, String password, Future<dynamic>? future, String trim) async {
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      Get.snackbar("Success", "Account created");
+    } catch (e) {
+      Get.snackbar("Error", e.toString());
+    }
   }
 }

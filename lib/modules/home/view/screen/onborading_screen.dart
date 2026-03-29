@@ -45,7 +45,7 @@ class OnboradingScreen extends StatelessWidget {
                         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
                         child: InkWell(
                           onTap: () {
-                            Get.to(Login());
+                            Get.to(LoginScreen());
                           },
                           child: GlassCard(
                             width: 300,
