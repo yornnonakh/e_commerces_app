@@ -1,6 +1,6 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
-import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
+import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/bage_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -36,7 +36,7 @@ class HeaderWidget extends StatelessWidget {
                 return Stack(
                   children: [
                     IconButton(
-                      onPressed: () => Get.to(CategoriesScreen()),
+                      onPressed: () => Get.to(ShoppingScreen()),
                       icon: Image.asset(AppAsset.icons, width: 55),
                     ),
                     if (favCount > 0)

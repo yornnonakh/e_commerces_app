@@ -18,7 +18,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      extendBody: false,
       body: Stack(
         children: [
           // 🔹 Background
@@ -35,94 +37,97 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  // 🔹 AppBar
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: AppColors.backgroundLight,
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: [
+                    // 🔹 AppBar
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: AppColors.backgroundLight,
+                          ),
+                          onPressed: () => Get.back(),
                         ),
-                        onPressed: () => Get.back(),
-                      ),
 
-                      const Text(
-                        "Settings",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        const Text(
+                          "Settings",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 50), // spacing for symmetry
-                    ],
-                  ),
+                        SizedBox(width: 50), // spacing for symmetry
+                      ],
+                    ),
 
-                  const SizedBox(height: 30),
+                    const SizedBox(height: 30),
 
-                  // 🔹 General Settings
-                  _sectionTitle("General"),
-                  _buildSwitchTile(
-                    icon: Icons.dark_mode,
-                    title: "Dark Mode",
-                    value: isDarkMode,
-                    onChanged: (val) {
-                      setState(() {
-                        isDarkMode = val;
-                      });
-                    },
-                  ),
-                  _buildSwitchTile(
-                    icon: Icons.notifications,
-                    title: "Notifications",
-                    value: isNotificationsOn,
-                    onChanged: (val) {
-                      setState(() {
-                        isNotificationsOn = val;
-                      });
-                    },
-                  ),
+                    // 🔹 General Settings
+                    _sectionTitle("General"),
+                    _buildSwitchTile(
+                      icon: Icons.dark_mode,
+                      title: "Dark Mode",
+                      value: isDarkMode,
+                      onChanged: (val) {
+                        setState(() {
+                          isDarkMode = val;
+                        });
+                      },
+                    ),
+                    _buildSwitchTile(
+                      icon: Icons.notifications,
+                      title: "Notifications",
+                      value: isNotificationsOn,
+                      onChanged: (val) {
+                        setState(() {
+                          isNotificationsOn = val;
+                        });
+                      },
+                    ),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  // 🔹 Account Settings
-                  _sectionTitle("Account"),
-                  _buildTile(
-                    icon: Icons.person,
-                    title: "Edit Profile",
-                    onTap: () {
-                      // Get.to(EditProfileScreen());
-                    },
-                  ),
-                  _buildTile(
-                    icon: Icons.lock,
-                    title: "Change Password",
-                    onTap: () {},
-                  ),
-                  _buildTile(
-                    icon: Icons.security,
-                    title: "Privacy & Security",
-                    onTap: () {},
-                  ),
+                    // 🔹 Account Settings
+                    _sectionTitle("Account"),
+                    _buildTile(
+                      icon: Icons.person,
+                      title: "Edit Profile",
+                      onTap: () {
+                        // Get.to(EditProfileScreen());
+                      },
+                    ),
+                    _buildTile(
+                      icon: Icons.lock,
+                      title: "Change Password",
+                      onTap: () {},
+                    ),
+                    _buildTile(
+                      icon: Icons.security,
+                      title: "Privacy & Security",
+                      onTap: () {},
+                    ),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  // 🔹 About
-                  _sectionTitle("About"),
-                  _buildTile(
-                    icon: Icons.info,
-                    title: "About App",
-                    onTap: () {},
-                  ),
-                  _buildTile(
-                    icon: Icons.help,
-                    title: "Help & Support",
-                    onTap: () {},
-                  ),
-                ],
+                    // 🔹 About
+                    _sectionTitle("About"),
+                    _buildTile(
+                      icon: Icons.info,
+                      title: "About App",
+                      onTap: () {},
+                    ),
+                    _buildTile(
+                      icon: Icons.help,
+                      title: "Help & Support",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

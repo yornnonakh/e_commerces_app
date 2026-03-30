@@ -1,4 +1,5 @@
 import 'package:e_commerces/app/config/app_assets.dart';
+import 'package:e_commerces/app/core/utils/responsive.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,10 @@ class SlideShowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context); // initialize responsive sizes
+
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
       child: ImageSlideshow(
         indicatorColor: AppColors.lightBlue,
         autoPlayInterval: 3000,
@@ -18,10 +21,10 @@ class SlideShowWidget extends StatelessWidget {
         children: AppAssetsCover.coverSlide
             .map(
               (imagePath) => Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: EdgeInsets.only(left: SizeConfig.blockWidth * 2),
                 child: GlassCard(
-                  width: 300,
-                  height: 180,
+                  width: SizeConfig.screenWidth * 0.8,
+                  height: SizeConfig.screenHeight * 0.25,
                   imagePath: imagePath,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(30),

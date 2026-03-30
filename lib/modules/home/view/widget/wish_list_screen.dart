@@ -13,7 +13,6 @@ class WishListScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // 🔹 Background
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -24,38 +23,26 @@ class WishListScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: Column(
                 children: [
-                  // 🔹 Top Bar
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.arrow_back_ios,
                           color: AppColors.backgroundLight,
                         ),
                         onPressed: () => Get.back(),
                       ),
-                      const Text(
-                        "Wishlist",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(width: 50),
+                      Text("Wishlist", style: AppTextStyle.categoryTextStyle),
+                      SizedBox(width: 50),
                     ],
                   ),
-
-                  const SizedBox(height: 20),
-
-                  // 🔹 Wishlist Items
+                  SizedBox(height: 20),
                   Expanded(
                     child: ListView(
                       children: [
@@ -74,38 +61,34 @@ class WishListScreen extends StatelessWidget {
     );
   }
 
-  // 🔹 Wishlist Item Card
   Widget _buildWishItem({required String name, required String price}) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
+      padding: EdgeInsets.symmetric(vertical: 8),
       child: GlassCard(
         height: 100,
         imagePath: '',
         child: Padding(
-          padding: const EdgeInsets.all(12),
+          padding: EdgeInsets.all(12),
           child: Row(
             children: [
-              // 🔹 Product Image Placeholder
               Container(
                 width: 70,
                 height: 70,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
+                  // ignore: deprecated_member_use
+                  color: AppColors.backgroundLight.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: const Icon(Icons.image, color: Colors.white),
+                child: Icon(Icons.image, color: AppColors.backgroundLight),
               ),
-
-              const SizedBox(width: 15),
-
-              // 🔹 Product Info
+              SizedBox(width: 15),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(name, style: AppTextStyle.paragrapTextStyle),
-                    const SizedBox(height: 5),
+                    SizedBox(height: 5),
                     Text(
                       price,
                       style: AppTextStyle.heading.copyWith(fontSize: 16),
@@ -113,12 +96,10 @@ class WishListScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // 🔹 Actions
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.favorite, color: Colors.red),
+                  Icon(Icons.favorite, color: AppColors.danger),
                   Icon(Icons.shopping_cart, color: AppColors.backgroundLight),
                 ],
               ),

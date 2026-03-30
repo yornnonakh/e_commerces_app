@@ -1,18 +1,18 @@
+import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
+import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
+import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
+import 'package:e_commerces/modules/home/view/widget/bottom_widget.dart';
+import 'package:e_commerces/modules/home/view/widget/bage_widget.dart';
+import 'package:e_commerces/modules/home/model/products_model.dart';
+import 'package:e_commerces/app/core/utils/responsive.dart';
+import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
-import 'package:e_commerces/app/theme/app_text_style.dart';
-import 'package:e_commerces/modules/home/model/products_model.dart';
-import 'package:e_commerces/modules/home/view/screen/categories_screen.dart';
-import 'package:e_commerces/modules/home/view/screen/product_detail.dart';
-import 'package:e_commerces/modules/home/view/widget/bage_widget.dart';
-import 'package:e_commerces/modules/home/view/widget/bottom_widget.dart';
-import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
-import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
-import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
+import '../../controller/products_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../controller/products_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig.init(context);
     return Scaffold(body: _buildBody());
   }
 
@@ -62,11 +63,7 @@ class HomeScreen extends StatelessWidget {
           SizedBox(
             width: 80,
             height: 80,
-            child: Image.asset(
-              AppAssets.logo,
-              color: AppColors.backgroundLight,
-              fit: BoxFit.cover,
-            ),
+            
           ),
           Row(
             children: [
@@ -75,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 return Stack(
                   children: [
                     IconButton(
-                      onPressed: () => Get.to(CategoriesScreen()),
+                      onPressed: () => Get.to(ShoppingScreen()),
                       icon: Image.asset(AppAsset.icons, width: 55),
                     ),
                     if (favCount > 0)
@@ -132,9 +129,9 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildPopularItem(ProductModel product) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), // responsive padding
       child: GlassCard(
-        width: 225,
+        width: SizeConfig.screenWidth * 0.55, // responsive width
         imagePath: '',
         child: Stack(
           children: [
@@ -143,7 +140,9 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockWidth * 4,
+                    ),
                     child: Image.asset(
                       product.image,
                       fit: BoxFit.cover,
@@ -152,37 +151,43 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 8,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.blockWidth * 3,
+                    vertical: SizeConfig.blockHeight * 1.5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // Product name and price
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             product.name,
-                            style: AppTextStyle.categoryTextStyle,
+                            style: AppTextStyle.categoryTextStyle.copyWith(
+                              fontSize: SizeConfig.blockWidth * 4,
+                            ),
                           ),
                           Text(
                             "\$${product.price}",
-                            style: AppTextStyle.categoryTextStyle,
+                            style: AppTextStyle.categoryTextStyle.copyWith(
+                              fontSize: SizeConfig.blockWidth * 3.5,
+                            ),
                           ),
                         ],
                       ),
+                      // Add to cart button
                       GestureDetector(
                         onTap: () =>
                             Get.to(() => ProductDetail(product: product)),
                         child: GlassCard(
-                          width: 50,
-                          height: 50,
+                          width: SizeConfig.blockWidth * 12,
+                          height: SizeConfig.blockWidth * 12,
                           imagePath: '',
                           child: Icon(
                             Icons.add_shopping_cart,
                             color: AppColors.backgroundLight,
-                            size: 22,
+                            size: SizeConfig.blockWidth * 5,
                           ),
                         ),
                       ),
@@ -191,21 +196,20 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
+            // Favorite button
             Positioned(
-              top: 10,
-              left: 10,
+              top: SizeConfig.blockHeight * 1.5,
+              left: SizeConfig.blockWidth * 3,
               child: Obx(() {
                 final isFav = controller.isFavorite(product);
                 return GestureDetector(
                   onTap: () => controller.toggleFavorite(product),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    padding: const EdgeInsets.all(8),
+                    padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                     decoration: BoxDecoration(
                       color: isFav
-                          // ignore: deprecated_member_use
                           ? AppColors.danger.withOpacity(0.8)
-                          // ignore: deprecated_member_use
                           : AppColors.backgroundLight.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
@@ -217,7 +221,7 @@ class HomeScreen extends StatelessWidget {
                         color: isFav
                             ? AppColors.backgroundLight
                             : AppColors.lightBlue,
-                        size: 20,
+                        size: SizeConfig.blockWidth * 5,
                       ),
                     ),
                   ),
@@ -246,47 +250,55 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildLatestItem(ProductModel product) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), // responsive padding
       child: Stack(
         children: [
           GlassCard(
-            width: double.infinity,
+            width: SizeConfig.screenWidth,
             imagePath: '',
             child: Row(
               children: [
                 SizedBox(
-                  width: 200,
-                  height: 188,
+                  width: SizeConfig.screenWidth * 0.4,
+                  height: SizeConfig.screenHeight * 0.20,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(
+                      SizeConfig.blockWidth * 5,
+                    ),
                     child: Image.asset(product.image, fit: BoxFit.cover),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                   child: SizedBox(
-                    width: 200,
-                    height: 188,
+                    width: SizeConfig.screenWidth * 0.49,
+                    height: SizeConfig.screenHeight * 0.19,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 20,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           product.name,
-                          style: AppTextStyle.featureTextStyle,
+                          style: AppTextStyle.featureTextStyle.copyWith(
+                            fontSize: SizeConfig.blockWidth * 5,
+                          ),
                         ),
                         Text(
-                          'Good products from original branch nike, new arrivied ',
-                          style: AppTextStyle.paragrapTextStyle,
+                          'Good products from original branch nike, new arrived',
+                          style: AppTextStyle.paragrapTextStyle.copyWith(
+                            fontSize: SizeConfig.blockWidth * 3.3,
+                          ),
                         ),
                         Row(
-                          spacing: 5,
                           children: [
                             Spacer(),
                             Text(
                               "\$${product.price}",
-                              style: AppTextStyle.buttonTextStyle,
+                              style: AppTextStyle.buttonTextStyle.copyWith(
+                                fontSize: SizeConfig.blockWidth * 5,
+                              ),
                             ),
+                            SizedBox(width: SizeConfig.blockWidth * 2),
                             GestureDetector(
                               onTap: () {
                                 Get.to(ProductDetail(product: product));
@@ -294,16 +306,27 @@ class HomeScreen extends StatelessWidget {
                               child: GlassCard(
                                 imagePath: '',
                                 child: Padding(
-                                  padding: const EdgeInsets.all(10),
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: SizeConfig.blockHeight * 1.5,
+                                    horizontal: SizeConfig.blockWidth * 3,
+                                  ),
                                   child: Row(
                                     children: [
                                       Icon(
                                         Icons.shopping_cart,
                                         color: AppColors.backgroundLight,
+                                        size: SizeConfig.blockWidth * 5,
+                                      ),
+                                      SizedBox(
+                                        width: SizeConfig.blockWidth * 1.5,
                                       ),
                                       Text(
                                         'Add to cart',
-                                        style: AppTextStyle.paragrapTextStyle,
+                                        style: AppTextStyle.paragrapTextStyle
+                                            .copyWith(
+                                              fontSize:
+                                                  SizeConfig.blockWidth * 3.2,
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -320,20 +343,18 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 10,
-            left: 10,
+            top: SizeConfig.blockHeight * 1.5,
+            left: SizeConfig.blockWidth * 3,
             child: Obx(() {
               final isFav = controller.isFavorite(product);
               return GestureDetector(
                 onTap: () => controller.toggleFavorite(product),
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                   decoration: BoxDecoration(
                     color: isFav
-                        // ignore: deprecated_member_use
                         ? AppColors.danger.withOpacity(0.8)
-                        // ignore: deprecated_member_use
                         : AppColors.backgroundLight.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
@@ -345,7 +366,7 @@ class HomeScreen extends StatelessWidget {
                       color: isFav
                           ? AppColors.backgroundLight
                           : AppColors.lightBlue,
-                      size: 20,
+                      size: SizeConfig.blockWidth * 5,
                     ),
                   ),
                 ),

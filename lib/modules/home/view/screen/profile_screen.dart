@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
-
   final UserController userController = Get.put(UserController());
 
   @override
@@ -20,7 +19,6 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // 🔹 Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -29,24 +27,17 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SafeArea(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      SizedBox(),
                       IconButton(
-                        onPressed: () => Get.back(),
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: AppColors.backgroundLight,
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => Get.to(() => const SettingsScreen()),
+                        onPressed: () => Get.to(() => SettingsScreen()),
                         icon: Icon(
                           Icons.settings,
                           color: AppColors.backgroundLight,
@@ -55,10 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-
-                const SizedBox(height: 30),
-
-                // 🔹 Profile Avatar
+                SizedBox(height: 30),
                 Obx(
                   () => CircleAvatar(
                     radius: 55,
@@ -68,49 +56,43 @@ class ProfileScreen extends StatelessWidget {
                               as ImageProvider
                         : null,
                     child: userController.avatarPath.value.isEmpty
-                        ? const Icon(
-                            Icons.person,
-                            size: 50,
-                            color: Colors.white,
-                          )
+                        ? Icon(Icons.person, size: 50, color: Colors.white)
                         : null,
                   ),
                 ),
-
-                const SizedBox(height: 15),
-
-                // 🔹 User Info
+                SizedBox(height: 15),
                 Obx(
                   () => Text(
                     userController.name.value,
                     style: AppTextStyle.heading,
                   ),
                 ),
-                const SizedBox(height: 5),
+                SizedBox(height: 5),
                 Obx(
                   () => Text(
                     userController.email.value,
                     style: TextStyle(color: AppColors.backgroundLight),
                   ),
                 ),
-
-                const SizedBox(height: 30),
-
-                // 🔹 Menu Items
+                SizedBox(height: 30),
                 Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: GlassCard(
-                      width: double.infinity,
-                      imagePath: '',
-                      child: Column(
-                        children: [
-                          _buildItem(Icons.person, "Edit Profile"),
-                          _buildItem(Icons.shopping_bag, "My Orders"),
-                          _buildItem(Icons.favorite, "Wishlist"),
-                          _buildItem(Icons.settings, "Settings"),
-                          _buildItem(Icons.logout, "Logout"),
-                        ],
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: GlassCard(
+                        width: double.infinity,
+                        height: 408,
+                        imagePath: '',
+                        child: Column(
+                          children: [
+                            _buildItem(Icons.person, "Edit Profile"),
+                            _buildItem(Icons.shopping_bag, "My Orders"),
+                            _buildItem(Icons.favorite, "Wishlist"),
+                            _buildItem(Icons.settings, "Settings"),
+                            _buildItem(Icons.logout, "Logout"),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -125,7 +107,7 @@ class ProfileScreen extends StatelessWidget {
 
   Widget _buildItem(IconData icon, String title) {
     return Padding(
-      padding: const EdgeInsets.only(right: 15, left: 15, top: 15),
+      padding: EdgeInsets.only(right: 15, left: 15, top: 15),
       child: Center(
         child: GlassCard(
           height: 62,
@@ -134,33 +116,32 @@ class ProfileScreen extends StatelessWidget {
             onTap: () {
               switch (title) {
                 case "Edit Profile":
-                  Get.to(() => const EditProfileScreen());
+                  Get.to(() => EditProfileScreen());
                   break;
                 case "My Orders":
-                  Get.to(() => const MyOrderScreen());
+                  Get.to(() => MyOrderScreen());
                   break;
                 case "Wishlist":
-                  Get.to(() => const WishListScreen());
+                  Get.to(() => WishListScreen());
                   break;
                 case "Settings":
-                  Get.to(() => const SettingsScreen());
+                  Get.to(() => SettingsScreen());
                   break;
                 case "Logout":
-                  // TODO: Implement logout functionality
                   break;
               }
             },
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                  padding: EdgeInsets.only(left: 15),
                   child: Icon(icon, color: AppColors.backgroundLight),
                 ),
-                const SizedBox(width: 15),
+                SizedBox(width: 15),
                 Text(title, style: AppTextStyle.paragrapTextStyle),
-                const Spacer(),
+                Spacer(),
                 Padding(
-                  padding: const EdgeInsets.only(right: 15),
+                  padding: EdgeInsets.only(right: 15),
                   child: Icon(
                     Icons.arrow_forward_ios,
                     size: 16,

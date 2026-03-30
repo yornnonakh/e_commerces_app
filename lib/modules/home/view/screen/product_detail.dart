@@ -5,6 +5,7 @@ import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/controller/products_detail_controller.dart';
 import 'package:e_commerces/modules/home/controller/size_controller.dart';
 import 'package:e_commerces/modules/home/model/products_model.dart';
+import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,6 +38,9 @@ class ProductDetail extends StatelessWidget {
             width: SizeConfig.screenWidth,
             height: SizeConfig.screenHeight * 0.45,
             decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.lightBlue.withOpacity(0.3),
+              ),
               color: AppColors.lightBlue.withOpacity(0.08),
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(SizeConfig.blockWidth * 60),
@@ -181,27 +185,32 @@ class ProductDetail extends StatelessWidget {
                           '\$${product.price}',
                           style: AppTextStyle.featureTextStyle,
                         ),
-                        GlassCard(
-                          height: SizeConfig.blockHeight * 5,
-                          imagePath: '',
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Icon(
-                                  Icons.shopping_cart,
-                                  color: AppColors.backgroundLight,
+                        InkWell(
+                          onTap: () {
+                            Get.to(ShoppingScreen());
+                          },
+                          child: GlassCard(
+                            height: SizeConfig.blockHeight * 5,
+                            imagePath: '',
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Icon(
+                                    Icons.shopping_cart,
+                                    color: AppColors.backgroundLight,
+                                  ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Text(
-                                  'Add to Cart',
-                                  style: AppTextStyle.categoryTextStyle,
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(
+                                    'Add to Cart',
+                                    style: AppTextStyle.categoryTextStyle,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ],

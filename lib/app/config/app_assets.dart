@@ -36,6 +36,7 @@ class AppAssetsCover {
     'assets/images/cover_slide/ID010.jpg',
   ];
 }
+
 class AppAssetsLatestProducts {
   static const latestProductsDetail = [
     'assets/images/latest_products_detail/IDC000.jpg',
@@ -56,4 +57,5 @@ class AppIcons {
 class AppAsset {
   static const String backgroundcover = 'assets/images/background.png';
   static const String icons = 'assets/icons/shopping_cart.png';
+  static const String login = 'assets/icons/login.jpg';
 }
