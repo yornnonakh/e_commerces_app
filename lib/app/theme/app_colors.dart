@@ -22,4 +22,10 @@ class AppColors {
   static const pinkAccent = Color(0xFFF472B6);
   static const orangeAccent = Color(0xFFF97316);
   static const cyan = Color(0xFFD4EFFF);
+
+  static const LinearGradient cyanToLightBlue = LinearGradient(
+    colors: [Colors.cyan, lightBlue],
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+  );
 }

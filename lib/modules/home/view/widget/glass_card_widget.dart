@@ -28,10 +28,7 @@ class GlassCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(30),
             // ignore: deprecated_member_use
             color: AppColors.backgroundLight.withOpacity(0.10),
-            // ignore: deprecated_member_use
-            border: Border.all(
-              color: AppColors.backgroundLight.withOpacity(0.5),
-            ),
+            border: Border.all(color: AppColors.lightBlue.withOpacity(0.3)),
           ),
           child: child,
         ),
