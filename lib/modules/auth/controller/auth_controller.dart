@@ -7,6 +7,8 @@ class AuthController extends GetxController {
   Rx<User?> firebaseUser = Rx<User?>(null);
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  get isLoading => null;
+
   @override
   void onInit() {
     super.onInit();
@@ -27,7 +29,12 @@ class AuthController extends GetxController {
     await _auth.signOut();
   }
 
-  Future<void> signUp(String email, String password, Future<dynamic>? future, String trim) async {
+  Future<void> signUp(
+    String email,
+    String password,
+    Future<dynamic>? future,
+    String trim,
+  ) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,

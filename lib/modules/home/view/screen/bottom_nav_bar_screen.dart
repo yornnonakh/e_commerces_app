@@ -8,7 +8,6 @@ import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'categories_screen.dart';
 
 class BottomnavigationbarScreen extends StatelessWidget {
   BottomnavigationbarScreen({super.key});
@@ -19,13 +18,11 @@ class BottomnavigationbarScreen extends StatelessWidget {
 
   final List<Widget> screens = [
     HomeScreen(),
-    CategoriesScreen(),
     ProfileScreen(),
     SearchScreen(),
   ];
   final List<IconData> icons = [
     Icons.home,
-    Icons.shop,
     Icons.person,
     Icons.search,
   ];
