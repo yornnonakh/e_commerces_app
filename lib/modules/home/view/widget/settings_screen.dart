@@ -1,6 +1,7 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/controller/theme_controller.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,12 +14,11 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = false;
   bool isNotificationsOn = true;
+  final ThemeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       extendBody: false,
       body: Stack(
@@ -69,15 +69,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
                     // 🔹 General Settings
                     _sectionTitle("General"),
-                    _buildSwitchTile(
-                      icon: Icons.dark_mode,
-                      title: "Dark Mode",
-                      value: isDarkMode,
-                      onChanged: (val) {
-                        setState(() {
-                          isDarkMode = val;
-                        });
-                      },
+                    Obx(
+                      () => _buildSwitchTile(
+                        icon: Icons.dark_mode,
+                        title: "Dark Mode",
+                        value: controller.isDark.value,
+                        onChanged: (val) {
+                          controller.toggleTheme();
+                        },
+                      ),
                     ),
                     _buildSwitchTile(
                       icon: Icons.notifications,
