@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppAssets.slasph),
+            image: AssetImage(AppAssets.backgroundcover),
             fit: BoxFit.cover,
           ),
         ),
@@ -34,7 +34,6 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(AppAssets.logo, height: 100),
                 SizedBox(height: 20),
                 GlassCard(
                   imagePath: '',
@@ -46,16 +45,30 @@ class LoginScreen extends StatelessWidget {
                       right: 20,
                     ),
                     child: Column(
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          "Welcome Back",
-                          style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.backgroundLight,
-                          ),
+                        Row(
+                          children: [
+                            IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: AppColors.backgroundLight,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 10),
+                        Text("Welcome Back", style: AppTextStyle.heading),
+                        Text(
+                          'Login here',
+                          style: AppTextStyle.paragrapTextStyle,
+                        ),
+                        SizedBox(height: 30),
+
                         TextField(
                           controller: emailController,
                           style: TextStyle(color: AppColors.backgroundLight),
@@ -114,27 +127,23 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 20),
-                        SizedBox(
+                        GlassCard(
+                          height: 60,
                           width: double.infinity,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              backgroundColor: Colors.white,
-                            ),
-                            onPressed: () async {
+                          imagePath: '',
+                          child: InkWell(
+                            onTap: () async {
                               await auth.login(
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
                               );
-
                               Get.offAll(() => BottomnavigationbarScreen());
                             },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(fontSize: 16),
+                            child: Center(
+                              child: Text(
+                                'Login',
+                                style: AppTextStyle.categoryTextStyle,
+                              ),
                             ),
                           ),
                         ),
@@ -153,8 +162,6 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 30),
-
-                        // 🔹 Divider
                         Row(
                           children: [
                             Expanded(child: Divider(color: AppColors.grey500)),

@@ -4,7 +4,7 @@ import 'app_colors.dart';
 class AppTextStyle {
   static const discoverTextStyle = TextStyle(
     fontSize: 40,
-    color: AppColors.backgroundDark,
+    color: AppColors.backgroundLight,
     fontWeight: FontWeight.bold,
     fontFamily: 'Roboto',
   );

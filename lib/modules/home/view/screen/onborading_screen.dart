@@ -20,7 +20,7 @@ class OnboradingScreen extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppAssets.onborading),
+            image: AssetImage(AppAssets.backgroundcover),
             fit: BoxFit.cover,
           ),
         ),
@@ -34,6 +34,7 @@ class OnboradingScreen extends StatelessWidget {
                 style: AppTextStyle.discoverTextStyle,
               ),
             ),
+            SizedBox(height: 15,),
             Center(
               child: Column(
                 children: [

@@ -100,8 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: IconButton(
                           icon: const Icon(Icons.camera_alt, size: 20),
                           onPressed: () {
-                            // TODO: pick image from gallery or camera
-                            // and update userController.avatarPath.value
+                            
                           },
                         ),
                       ),
@@ -171,6 +170,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         labelText: label,
         labelStyle: const TextStyle(color: Colors.white70),
         filled: true,
+        // ignore: deprecated_member_use
         fillColor: Colors.white.withOpacity(0.1),
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.white70),
