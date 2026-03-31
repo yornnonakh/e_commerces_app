@@ -45,4 +45,8 @@ class AuthController extends GetxController {
       Get.snackbar("Error", e.toString());
     }
   }
+
+  Future<Object?> register(String trim, String trim2, String trim3) async {
+    return null;
+  }
 }

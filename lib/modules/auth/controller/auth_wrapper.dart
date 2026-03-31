@@ -1,5 +1,5 @@
 import 'package:e_commerces/modules/auth/controller/auth_controller.dart';
-import 'package:e_commerces/modules/auth/screen/login_screen.dart';
+import 'package:e_commerces/modules/auth/view/screen/login_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
