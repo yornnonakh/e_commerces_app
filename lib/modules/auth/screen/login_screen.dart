@@ -34,11 +34,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // 🖼️ LOGO
-                Image.asset(
-                  AppAssets.logo, // 👉 make sure you have logo
-                  height: 100,
-                ),
+                Image.asset(AppAssets.logo, height: 100),
                 SizedBox(height: 20),
                 GlassCard(
                   imagePath: '',
@@ -56,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: AppColors.backgroundLight,
                           ),
                         ),
                         SizedBox(height: 15),
@@ -71,6 +67,7 @@ class LoginScreen extends StatelessWidget {
                               color: AppColors.backgroundLight,
                             ),
                             filled: true,
+                            // ignore: deprecated_member_use
                             fillColor: AppColors.backgroundLight.withOpacity(
                               0.1,
                             ),
@@ -98,14 +95,17 @@ class LoginScreen extends StatelessWidget {
                                   isHidden.value
                                       ? Icons.visibility_off
                                       : Icons.visibility,
-                                  color: Colors.white,
+                                  color: AppColors.backgroundLight,
                                 ),
                                 onPressed: () {
                                   isHidden.value = !isHidden.value;
                                 },
                               ),
                               filled: true,
-                              fillColor: Colors.white.withOpacity(0.1),
+                              // ignore: deprecated_member_use
+                              fillColor: AppColors.backgroundLight.withOpacity(
+                                0.1,
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide.none,
@@ -157,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                         // 🔹 Divider
                         Row(
                           children: [
-                            Expanded(child: Divider(color: Colors.white30)),
+                            Expanded(child: Divider(color: AppColors.grey500)),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
@@ -165,13 +165,10 @@ class LoginScreen extends StatelessWidget {
                                 style: AppTextStyle.categoryTextStyle,
                               ),
                             ),
-                            Expanded(child: Divider(color: Colors.white30)),
+                            Expanded(child: Divider(color: AppColors.grey500)),
                           ],
                         ),
-
                         SizedBox(height: 30),
-
-                        // 🔹 Social Buttons
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -180,16 +177,9 @@ class LoginScreen extends StatelessWidget {
                               onTap: () {},
                             ),
                             SizedBox(width: 15),
-
                             _socialButton(icon: Icons.apple, onTap: () {}),
                             SizedBox(width: 15),
-
-                            _socialButton(
-                              icon: Icons.facebook,
-                              onTap: () {
-                                // TODO: Facebook Login
-                              },
-                            ),
+                            _socialButton(icon: Icons.facebook, onTap: () {}),
                           ],
                         ),
                       ],
@@ -211,7 +201,7 @@ class LoginScreen extends StatelessWidget {
         width: 55,
         height: 55,
         imagePath: '',
-        child: Icon(icon, color: Colors.white, size: 28),
+        child: Icon(icon, color: AppColors.backgroundLight, size: 28),
       ),
     );
   }
