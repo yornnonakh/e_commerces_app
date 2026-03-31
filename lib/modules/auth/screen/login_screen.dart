@@ -24,7 +24,7 @@ class LoginScreen extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(AppAssets.backgroundcover),
+            image: AssetImage(AppAssets.slasph),
             fit: BoxFit.cover,
           ),
         ),
@@ -40,22 +40,26 @@ class LoginScreen extends StatelessWidget {
                   height: 100,
                 ),
                 SizedBox(height: 20),
-                Text(
-                  "Welcome Back",
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(height: 30),
                 GlassCard(
                   imagePath: '',
                   child: Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: EdgeInsets.only(
+                      top: 25,
+                      bottom: 25,
+                      left: 20,
+                      right: 20,
+                    ),
                     child: Column(
                       children: [
-                        // 📧 Emailr
+                        Text(
+                          "Welcome Back",
+                          style: TextStyle(
+                            fontSize: 26,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                        SizedBox(height: 15),
                         TextField(
                           controller: emailController,
                           style: TextStyle(color: AppColors.backgroundLight),
@@ -148,7 +152,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(height: 15),
+                        SizedBox(height: 30),
 
                         // 🔹 Divider
                         Row(
@@ -158,14 +162,14 @@ class LoginScreen extends StatelessWidget {
                               padding: EdgeInsets.symmetric(horizontal: 10),
                               child: Text(
                                 "Or continue with",
-                                style: AppTextStyle.categoryTextStyle
+                                style: AppTextStyle.categoryTextStyle,
                               ),
                             ),
                             Expanded(child: Divider(color: Colors.white30)),
                           ],
                         ),
 
-                        SizedBox(height: 15),
+                        SizedBox(height: 30),
 
                         // 🔹 Social Buttons
                         Row(
