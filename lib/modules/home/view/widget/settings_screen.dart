@@ -1,6 +1,7 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/controller/theme_controller.dart';
 import 'package:e_commerces/modules/home/view/widget/edit_profile_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
