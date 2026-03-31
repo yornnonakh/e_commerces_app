@@ -23,7 +23,6 @@ class MyOrderScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -41,19 +40,12 @@ class MyOrderScreen extends StatelessWidget {
                       ),
                       const Text(
                         "My Orders",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: AppTextStyle.categoryTextStyle
                       ),
                       const SizedBox(width: 50),
                     ],
                   ),
-
                   const SizedBox(height: 20),
-
-                  // 🔹 Orders List
                   Expanded(
                     child: ListView(
                       children: [
@@ -83,29 +75,25 @@ class MyOrderScreen extends StatelessWidget {
       ),
     );
   }
-
-  // 🔹 Order Item Card
   Widget _buildOrderItem({
     required String orderId,
     required String status,
     required String price,
   }) {
     Color statusColor;
-
     switch (status) {
       case "Delivered":
-        statusColor = Colors.green;
+        statusColor = AppColors.accent;
         break;
       case "Pending":
-        statusColor = Colors.orange;
+        statusColor = AppColors.orangeAccent;
         break;
       case "Cancelled":
-        statusColor = Colors.red;
+        statusColor = AppColors.danger;
         break;
       default:
-        statusColor = Colors.white;
+        statusColor = AppColors.backgroundLight;
     }
-
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: GlassCard(
@@ -115,19 +103,11 @@ class MyOrderScreen extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // 🔹 Icon
-              Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
+              GlassCard(
+                imagePath: '',
                 child: const Icon(Icons.shopping_bag, color: Colors.white),
               ),
-
               const SizedBox(width: 15),
-
-              // 🔹 Order Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,8 +122,6 @@ class MyOrderScreen extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // 🔹 Price
               Text(price, style: AppTextStyle.heading.copyWith(fontSize: 16)),
             ],
           ),
