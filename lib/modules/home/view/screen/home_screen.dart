@@ -209,7 +209,9 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                     decoration: BoxDecoration(
                       color: isFav
+                          // ignore: deprecated_member_use
                           ? AppColors.danger.withOpacity(0.8)
+                          // ignore: deprecated_member_use
                           : AppColors.backgroundLight.withOpacity(0.2),
                       shape: BoxShape.circle,
                     ),
@@ -354,7 +356,9 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                   decoration: BoxDecoration(
                     color: isFav
+                        // ignore: deprecated_member_use
                         ? AppColors.danger.withOpacity(0.8)
+                        // ignore: deprecated_member_use
                         : AppColors.backgroundLight.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),

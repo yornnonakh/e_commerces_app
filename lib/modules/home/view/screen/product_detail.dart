@@ -39,8 +39,10 @@ class ProductDetail extends StatelessWidget {
             height: SizeConfig.screenHeight * 0.45,
             decoration: BoxDecoration(
               border: Border.all(
+                // ignore: deprecated_member_use
                 color: AppColors.lightBlue.withOpacity(0.3),
               ),
+              // ignore: deprecated_member_use
               color: AppColors.lightBlue.withOpacity(0.08),
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(SizeConfig.blockWidth * 60),
@@ -146,11 +148,13 @@ class ProductDetail extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   color: isSelected
                                       ? AppColors.danger
+                                      // ignore: deprecated_member_use
                                       : AppColors.backgroundLight.withOpacity(
                                           0.3,
                                         ),
                                   borderRadius: BorderRadius.circular(100),
                                   border: Border.all(
+                                    // ignore: deprecated_member_use
                                     color: AppColors.lightBlue.withOpacity(0.3),
                                   ),
                                 ),

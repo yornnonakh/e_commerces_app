@@ -7,7 +7,7 @@ class AuthController extends GetxController {
   Rx<User?> firebaseUser = Rx<User?>(null);
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  get isLoading => null;
+  Null get isLoading => null;
 
   @override
   void onInit() {

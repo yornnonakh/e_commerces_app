@@ -204,7 +204,8 @@ class SignUpScreen extends StatelessWidget {
         hintText: hint,
         hintStyle: const TextStyle(color: Colors.white70),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
+        // ignore: deprecated_member_use
+        fillColor: AppColors.backgroundLight.withOpacity(0.1),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15),
           borderSide: BorderSide.none,
