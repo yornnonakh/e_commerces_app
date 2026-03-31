@@ -1,7 +1,7 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
-import 'package:e_commerces/modules/home/controller/theme_controller.dart';
+import 'package:e_commerces/modules/home/view/widget/edit_profile_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,7 +23,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       extendBody: false,
       body: Stack(
         children: [
-          // 🔹 Background
           Container(
             width: double.infinity,
             height: double.infinity,
@@ -36,38 +35,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16),
               child: SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 child: Column(
                   children: [
-                    // 🔹 AppBar
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.arrow_back_ios,
                             color: AppColors.backgroundLight,
                           ),
                           onPressed: () => Get.back(),
                         ),
-
-                        const Text(
-                          "Settings",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(width: 50), // spacing for symmetry
+                        Text("Settings", style: AppTextStyle.featureTextStyle),
+                        SizedBox(width: 50),
                       ],
                     ),
-
-                    const SizedBox(height: 30),
-
-                    // 🔹 General Settings
+                    SizedBox(height: 30),
                     _sectionTitle("General"),
                     Obx(
                       () => _buildSwitchTile(
@@ -89,16 +76,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         });
                       },
                     ),
-
-                    const SizedBox(height: 20),
-
-                    // 🔹 Account Settings
+                    SizedBox(height: 20),
                     _sectionTitle("Account"),
                     _buildTile(
                       icon: Icons.person,
                       title: "Edit Profile",
                       onTap: () {
                         // Get.to(EditProfileScreen());
+                        Get.to(EditProfileScreen());
                       },
                     ),
                     _buildTile(
@@ -111,10 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       title: "Privacy & Security",
                       onTap: () {},
                     ),
-
-                    const SizedBox(height: 20),
-
-                    // 🔹 About
+                    SizedBox(height: 20),
                     _sectionTitle("About"),
                     _buildTile(
                       icon: Icons.info,
@@ -136,10 +118,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // 🔹 Section Title
   Widget _sectionTitle(String title) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: EdgeInsets.symmetric(vertical: 10),
       child: Align(
         alignment: Alignment.centerLeft,
         child: Text(
@@ -153,24 +134,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // 🔹 Normal Tile
   Widget _buildTile({
     required IconData icon,
     required String title,
     required VoidCallback onTap,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: EdgeInsets.symmetric(vertical: 6),
       child: GlassCard(
         height: 62,
         imagePath: '',
         child: ListTile(
           leading: Icon(icon, color: AppColors.backgroundLight),
           title: Text(title, style: AppTextStyle.paragrapTextStyle),
-          trailing: const Icon(
+          trailing: Icon(
             Icons.arrow_forward_ios,
             size: 16,
-            color: Colors.white,
+            color: AppColors.backgroundLight,
           ),
           onTap: onTap,
         ),
@@ -178,7 +158,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // 🔹 Switch Tile
   Widget _buildSwitchTile({
     required IconData icon,
     required String title,
@@ -186,7 +165,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required Function(bool) onChanged,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: EdgeInsets.symmetric(vertical: 6),
       child: GlassCard(
         height: 62,
         imagePath: '',
