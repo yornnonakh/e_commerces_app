@@ -14,8 +14,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool isDarkMode = false;
   bool isNotificationsOn = true;
+  final ThemeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,15 +56,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     SizedBox(height: 30),
                     _sectionTitle("General"),
-                    _buildSwitchTile(
-                      icon: Icons.dark_mode,
-                      title: "Dark Mode",
-                      value: isDarkMode,
-                      onChanged: (val) {
-                        setState(() {
-                          isDarkMode = val;
-                        });
-                      },
+                    Obx(
+                      () => _buildSwitchTile(
+                        icon: Icons.dark_mode,
+                        title: "Dark Mode",
+                        value: controller.isDark.value,
+                        onChanged: (val) {
+                          controller.toggleTheme();
+                        },
+                      ),
                     ),
                     _buildSwitchTile(
                       icon: Icons.notifications,
