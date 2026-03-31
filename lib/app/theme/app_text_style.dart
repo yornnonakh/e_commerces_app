@@ -32,8 +32,8 @@ class AppTextStyle {
     fontFamily: 'Roboto',
   );
   static const buttonTextStyle = TextStyle(
-    fontSize: 18,
-    color: AppColors.backgroundDark,
+    fontSize: 20,
+    color: AppColors.backgroundLight,
     fontWeight: FontWeight.bold,
     fontFamily: 'Roboto',
   );
