@@ -1,8 +1,18 @@
 import 'package:e_commerces/app/config/app_assets.dart';
+import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/view/screen/success_screen.dart';
+import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 
 class AddCardWidget extends StatelessWidget {
-  const AddCardWidget({super.key});
+  AddCardWidget({super.key});
+
+  final nameController = TextEditingController();
+  final numberController = TextEditingController();
+  final cvvController = TextEditingController();
+  final expireController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +33,12 @@ class AddCardWidget extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.arrow_back_ios),
+                    IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: Icon(Icons.arrow_back_ios),
+                    ),
                     SizedBox(width: 10),
                     Text(
                       "Add New Card",
@@ -34,29 +49,53 @@ class AddCardWidget extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 SizedBox(height: 20),
-                _input("Name"),
+
+                _input("Name", nameController),
                 SizedBox(height: 10),
-                _input("Card Number"),
+                _input("Card Number", numberController),
                 SizedBox(height: 10),
+
                 Row(
                   children: [
-                    Expanded(child: _input("CVV")),
+                    Expanded(child: _input("CVV", cvvController)),
                     SizedBox(width: 10),
-                    Expanded(child: _input("Expires")),
+                    Expanded(child: _input("Expires", expireController)),
                   ],
                 ),
+
                 SizedBox(height: 10),
+
                 Row(
                   children: [
-                    Checkbox(value: true, onChanged: null),
+                    Checkbox(value: true, onChanged: (v) {}),
                     Text("Save card info"),
                   ],
                 ),
+
                 Spacer(),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(onPressed: () {}, child: Text("Save")),
+
+                /// 🔥 SAVE BUTTON
+                GestureDetector(
+                  onTap: () {
+                    _onSave();
+                    Get.to(SuccessScreen());
+                  },
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: GlassCard(
+                      width: 300,
+                      height: 60,
+                      imagePath: '',
+                      child: Center(
+                        child: Text(
+                          'Save',
+                          style: AppTextStyle.categoryTextStyle,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -66,17 +105,41 @@ class AddCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _input(String hint) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: hint,
-        filled: true,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide.none,
+  Widget _input(String hint, TextEditingController controller) {
+    return GlassCard(
+      imagePath: '',
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hint,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide.none,
+          ),
         ),
       ),
     );
+  }
+
+  /// 🔥 SAVE FUNCTION
+  void _onSave() {
+    if (nameController.text.isEmpty ||
+        numberController.text.isEmpty ||
+        cvvController.text.isEmpty ||
+        expireController.text.isEmpty) {
+      Get.snackbar("Error", "Please fill all fields");
+      return;
+    }
+
+    /// Create card object
+    final newCard = {
+      "name": nameController.text,
+      "number": numberController.text,
+      "cvv": cvvController.text,
+      "expire": expireController.text,
+    };
+
+    /// Go back + send data
+    Get.back(result: newCard);
   }
 }

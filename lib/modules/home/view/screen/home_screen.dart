@@ -19,6 +19,12 @@ class HomeScreen extends StatelessWidget {
 
   final controller = Get.find<ProductController>();
 
+  get query => null;
+
+  get results => null;
+
+  ValueChanged<String>? get search => null;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
