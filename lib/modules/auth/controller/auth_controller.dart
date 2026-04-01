@@ -7,7 +7,7 @@ class AuthController extends GetxController {
   Rx<User?> firebaseUser = Rx<User?>(null);
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  get isLoading => null;
+  Null get isLoading => null;
 
   @override
   void onInit() {
@@ -44,5 +44,9 @@ class AuthController extends GetxController {
     } catch (e) {
       Get.snackbar("Error", e.toString());
     }
+  }
+
+  Future<Object?> register(String trim, String trim2, String trim3) async {
+    return null;
   }
 }

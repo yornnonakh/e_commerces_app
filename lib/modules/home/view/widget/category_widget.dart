@@ -47,6 +47,7 @@ class CategoryWidget extends StatelessWidget {
                       : null,
                   color: isSelected
                       ? null
+                      // ignore: deprecated_member_use
                       : AppColors.backgroundLight.withOpacity(0.2),
                   borderRadius: BorderRadius.circular(
                     SizeConfig.blockWidth * 4,
@@ -54,6 +55,7 @@ class CategoryWidget extends StatelessWidget {
                   border: Border.all(
                     color: isSelected
                         ? Colors.transparent
+                        // ignore: deprecated_member_use
                         : AppColors.lightBlue.withOpacity(0.3),
                   ),
                 ),
@@ -61,7 +63,7 @@ class CategoryWidget extends StatelessWidget {
                   child: Text(
                     categories[index],
                     style: AppTextStyle.categoryTextStyle.copyWith(
-                      color: isSelected ? Colors.white : AppColors.lightBlue,
+                      color: isSelected ? AppColors.backgroundLight : AppColors.lightBlue,
                     ),
                   ),
                 ),
