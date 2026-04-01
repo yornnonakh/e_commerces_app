@@ -6,13 +6,13 @@ class ProductSearchController extends GetxController {
   var results = <String>[].obs;
 
   final products = [
-    'shoes 1'
-        'shoes 2'
-        'shoes 3'
-        'shoes 4'
-        'shoes 5'
-        'shoes 6'
-        'shoes 7'
+    'shoes 1',
+        'shoes 2',
+        'shoes 3',
+        'shoes 4',
+        'shoes 5',
+        'shoes 6',
+        'shoes 7',
         'shoes 8',
   ];
 
