@@ -209,18 +209,16 @@ void addToCart(ProductModel product) {
 
   // ✅ INCREASE
   void increaseQty(int index) {
-    cartList[index].qty++;
-    cartList.refresh();
-  }
+  cartList[index].qty++;
+  cartList.refresh(); // 🔥 IMPORTANT
+}
 
-  // ✅ DECREASE
-  void decreaseQty(int index) {
-    if (cartList[index].qty > 1) {
-      cartList[index].qty--;
-    } else {
-      cartList.removeAt(index);
-    }
+void decreaseQty(int index) {
+  if (cartList[index].qty > 1) {
+    cartList[index].qty--;
+    cartList.refresh(); // 🔥 IMPORTANT
   }
+}
 
   // ✅ TOTAL
   double get total {
