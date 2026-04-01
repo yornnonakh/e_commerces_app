@@ -176,6 +176,26 @@ class ProductController extends GetxController {
     ]);
   }
 
+
+void addToCart(ProductModel product) {
+    int index =
+        cartList.indexWhere((item) => item.name == product.name);
+
+    if (index >= 0) {
+      cartList[index].qty += 1;
+      cartList.refresh();
+    } else {
+      cartList.add(ProductModel(
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        images: product.images,
+        qty: 1,
+      ));
+    }
+  }
+
+  // ✅ FAVORITE
   void toggleFavorite(ProductModel product) {
     if (favoriteProducts.contains(product)) {
       favoriteProducts.remove(product);
@@ -184,7 +204,28 @@ class ProductController extends GetxController {
     }
   }
 
-  void addToCart(ProductModel product) => cartList.add(product);
+  bool isFavorite(ProductModel product) =>
+      favoriteProducts.contains(product);
 
-  bool isFavorite(ProductModel product) => favoriteProducts.contains(product);
+  // ✅ INCREASE
+  void increaseQty(int index) {
+    cartList[index].qty++;
+    cartList.refresh();
+  }
+
+  // ✅ DECREASE
+  void decreaseQty(int index) {
+    if (cartList[index].qty > 1) {
+      cartList[index].qty--;
+    } else {
+      cartList.removeAt(index);
+    }
+  }
+
+  // ✅ TOTAL
+  double get total {
+    return cartList.fold(
+        0, (sum, item) => sum + item.price * item.qty);
+  }
 }
+

@@ -1,14 +1,17 @@
 import 'package:e_commerces/app/config/app_assets.dart';
 import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
+import 'package:e_commerces/modules/home/controller/products_controller.dart';
+import 'package:e_commerces/modules/home/model/products_detail_model.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/payments_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get.dart';
 
 class ShoppingScreen extends StatelessWidget {
-  const ShoppingScreen({super.key});
+  ShoppingScreen({super.key});
+
+  final controller = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,30 +35,40 @@ class ShoppingScreen extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
+                      onPressed: () => Get.back(),
                       icon: Icon(
                         Icons.arrow_back_ios,
                         color: AppColors.backgroundLight,
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text("Shopping Bag", style: AppTextStyle.buttonTextStyle),
                   ],
                 ),
 
                 const SizedBox(height: 20),
 
-                // Items
+                // ✅ CART ITEMS (DYNAMIC)
                 Expanded(
-                  child: ListView(
-                    children: const [
-                      CartItem(name: "Facial Cleanser", price: 19.99),
-                      CartItem(name: "Cream Cleanser", price: 12.99),
-                      CartItem(name: "Cleansing Oil", price: 12.99),
-                    ],
-                  ),
+                  child: Obx(() {
+                    if (controller.cartList.isEmpty) {
+                      return Center(
+                        child: Text(
+                          "Cart is empty",
+                          style: AppTextStyle.categoryTextStyle,
+                        ),
+                      );
+                    }
+
+                    return ListView.builder(
+                      itemCount: controller.cartList.length,
+                      itemBuilder: (context, index) {
+                        var item = controller.cartList[index];
+
+                        return CartItem(item: item, index: index);
+                      },
+                    );
+                  }),
                 ),
 
                 // Promo
@@ -84,10 +97,18 @@ class ShoppingScreen extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                // Total
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Bag Total"), Text("\$50.98")],
+                // ✅ TOTAL (DYNAMIC)
+                Obx(
+                  () => Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Bag Total", style: AppTextStyle.categoryTextStyle),
+                      Text(
+                        "\$${controller.total}",
+                        style: AppTextStyle.categoryTextStyle,
+                      ),
+                    ],
+                  ),
                 ),
 
                 const SizedBox(height: 20),
@@ -103,7 +124,7 @@ class ShoppingScreen extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      Get.to(PaymentScreen());
+                      Get.to(() => PaymentScreen());
                     },
                     child: const Text("Proceed To Checkout"),
                   ),
@@ -117,12 +138,13 @@ class ShoppingScreen extends StatelessWidget {
   }
 }
 
-// Cart Item Widget
 class CartItem extends StatelessWidget {
-  final String name;
-  final double price;
+  final dynamic item;
+  final int index;
 
-  const CartItem({super.key, required this.name, required this.price});
+  CartItem({super.key, required this.item, required this.index});
+
+  final controller = Get.find<ProductController>();
 
   @override
   Widget build(BuildContext context) {
@@ -132,31 +154,53 @@ class CartItem extends StatelessWidget {
         imagePath: '',
         child: Row(
           children: [
-            GlassCard(width: 130, height: 120, imagePath: ''),
+            // ✅ Image (ONLY ONE)
+            Container(
+              width: 130,
+              height: 130,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Image.asset("${item.image}"),
+            ),
             const SizedBox(width: 10),
+
+            // ✅ Info
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(name, style: AppTextStyle.categoryTextStyle),
-                    Text("\$$price", style: AppTextStyle.categoryTextStyle),
+                    Text(item.name, style: AppTextStyle.categoryTextStyle),
+                    Text(
+                      "\$${item.price}",
+                      style: AppTextStyle.categoryTextStyle,
+                    ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                children: const [
-                  Icon(Icons.remove_circle_outline, color: AppColors.danger),
-                  SizedBox(width: 5),
-                  Text("1", style: AppTextStyle.categoryTextStyle),
-                  SizedBox(width: 5),
-                  Icon(Icons.add_circle_outline, color: AppColors.accent),
-                ],
-              ),
+
+            // ✅ QTY CONTROL
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () => controller.decreaseQty(index),
+                  icon: Icon(
+                    Icons.remove_circle_outline,
+                    color: AppColors.danger,
+                  ),
+                ),
+
+                // ❗ NO NEED Obx HERE
+                Text("${item.qty}", style: AppTextStyle.categoryTextStyle),
+
+                IconButton(
+                  onPressed: () => controller.increaseQty(index),
+                  icon: Icon(Icons.add_circle_outline, color: AppColors.accent),
+                ),
+              ],
             ),
           ],
         ),
