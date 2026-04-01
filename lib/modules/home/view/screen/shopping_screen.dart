@@ -14,130 +14,161 @@ class ShoppingScreen extends StatelessWidget {
   final controller = Get.find<ProductController>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(AppAssets.backgroundcover),
-            fit: BoxFit.cover,
+  @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: Colors.grey.shade200,
+    body: SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
           ),
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Get.back(),
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: AppColors.backgroundLight,
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    Text("Shopping Bag", style: AppTextStyle.buttonTextStyle),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-
-                // ✅ CART ITEMS (DYNAMIC)
-                Expanded(
-                  child: Obx(() {
-                    if (controller.cartList.isEmpty) {
-                      return Center(
-                        child: Text(
-                          "Cart is empty",
-                          style: AppTextStyle.categoryTextStyle,
-                        ),
-                      );
-                    }
-
-                    return ListView.builder(
-                      itemCount: controller.cartList.length,
-                      itemBuilder: (context, index) {
-                        var item = controller.cartList[index];
-
-                        return CartItem(item: item, index: index);
-                      },
-                    );
-                  }),
-                ),
-
-                // Promo
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: "Promo Code",
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(12),
-                            borderSide: BorderSide.none,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 10),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text("Apply"),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 20),
-
-                // ✅ TOTAL (DYNAMIC)
-                Obx(
-                  () => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Bag Total", style: AppTextStyle.categoryTextStyle),
-                      Text(
-                        "\$${controller.total}",
-                        style: AppTextStyle.categoryTextStyle,
-                      ),
-                    ],
+          child: Column(
+            children: [
+              // HEADER
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: const Icon(Icons.arrow_back_ios),
                   ),
-                ),
+                  const Spacer(),
+                  const Text(
+                    "Shopping Bag",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const Spacer(),
+                  const Icon(Icons.shopping_bag_outlined),
+                ],
+              ),
 
-                const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
-                // Button
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.to(() => PaymentScreen());
+              // CART LIST
+              Expanded(
+                child: Obx(() {
+                  if (controller.cartList.isEmpty) {
+                    return const Center(child: Text("Cart is empty"));
+                  }
+
+                  return ListView.builder(
+                    itemCount: controller.cartList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.cartList[index];
+                      return CartItem(item: item, index: index);
                     },
-                    child: const Text("Proceed To Checkout"),
+                  );
+                }),
+              ),
+
+              const SizedBox(height: 10),
+
+              // PROMO
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Promo Code",
+                        filled: true,
+                        fillColor: Colors.grey.shade100,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    onPressed: () {},
+                    child: const Text("Apply"),
+                  ),
+                ],
+              ),
+
+              const SizedBox(height: 20),
+
+              // TOTAL SECTION
+              Obx(() {
+                double subtotal = controller.total;
+                double shipping = 4.99;
+                double total = subtotal + shipping;
+
+                return Column(
+                  children: [
+                    buildRow("Subtotal", subtotal),
+                    buildRow("Shipping", shipping),
+                    const Divider(),
+                    buildRow("Bag Total", total, isBold: true),
+                  ],
+                );
+              }),
+
+              const SizedBox(height: 20),
+
+              // CHECKOUT BUTTON
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    padding: const EdgeInsets.all(16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  onPressed: () {
+                    Get.to(() => PaymentScreen());
+                  },
+                  child: const Text(
+                    "Proceed To Checkout",
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
 }
 
+// helper
+Widget buildRow(String title, double value, {bool isBold = false}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 4),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+        Text(
+          "\$${value.toStringAsFixed(2)}",
+          style: TextStyle(
+            fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ],
+    ),
+  );
+}
+}
 class CartItem extends StatelessWidget {
   final dynamic item;
   final int index;
@@ -148,63 +179,81 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(10),
-      child: GlassCard(
-        imagePath: '',
-        child: Row(
-          children: [
-            // ✅ Image (ONLY ONE)
-            Container(
-              width: 130,
-              height: 130,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Image.asset("${item.image}"),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade100,
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Row(
+        children: [
+          // IMAGE
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.asset(
+              item.image,
+              width: 70,
+              height: 70,
+              fit: BoxFit.cover,
             ),
-            const SizedBox(width: 10),
+          ),
 
-            // ✅ Info
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(item.name, style: AppTextStyle.categoryTextStyle),
-                    Text(
-                      "\$${item.price}",
-                      style: AppTextStyle.categoryTextStyle,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          const SizedBox(width: 10),
 
-            // ✅ QTY CONTROL
-            Row(
+          // INFO
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () => controller.decreaseQty(index),
-                  icon: Icon(
-                    Icons.remove_circle_outline,
-                    color: AppColors.danger,
-                  ),
-                ),
-
-                // ❗ NO NEED Obx HERE
-                Text("${item.qty}", style: AppTextStyle.categoryTextStyle),
-
-                IconButton(
-                  onPressed: () => controller.increaseQty(index),
-                  icon: Icon(Icons.add_circle_outline, color: AppColors.accent),
-                ),
+                Text(item.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                const SizedBox(height: 4),
+                Text("\$${item.price}"),
               ],
             ),
-          ],
-        ),
+          ),
+
+          // QTY + DELETE
+          Column(
+            children: [
+              GestureDetector(
+                onTap: () => controller.cartList.removeAt(index),
+                child: const Icon(Icons.close, size: 18),
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => controller.decreaseQty(index),
+                    child: buildCircle(Icons.remove),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    child: Text("${item.qty}"),
+                  ),
+                  GestureDetector(
+                    onTap: () => controller.increaseQty(index),
+                    child: buildCircle(Icons.add),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget buildCircle(IconData icon) {
+    return Container(
+      width: 26,
+      height: 26,
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        shape: BoxShape.circle,
+      ),
+      child: Icon(icon, size: 14, color: Colors.white),
     );
   }
 }
