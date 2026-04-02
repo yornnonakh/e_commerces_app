@@ -4,7 +4,7 @@ import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/controller/products_controller.dart';
 import 'package:e_commerces/modules/home/controller/products_detail_controller.dart';
-import 'package:e_commerces/modules/home/controller/size_controller.dart'; // ✅ ADD THIS
+import 'package:e_commerces/modules/home/controller/size_controller.dart'; 
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
@@ -14,13 +14,12 @@ import 'package:get/get.dart';
 class ProductDetail extends StatelessWidget {
   final ProductModel product;
 
-  final ProductDetailController controller =
-      Get.put(ProductDetailController());
+  final ProductDetailController controller = Get.put(ProductDetailController());
 
   final SizeController sizeController = Get.put(SizeController());
 
   final ProductController productController =
-      Get.find<ProductController>(); // ✅ GET CONTROLLER
+      Get.find<ProductController>(); 
 
   ProductDetail({super.key, required this.product});
 
@@ -121,7 +120,7 @@ class ProductDetail extends StatelessWidget {
             bottom: 0,
             child: GlassCard(
               width: SizeConfig.screenWidth,
-              height: SizeConfig.screenHeight * 0.55,
+              height: SizeConfig.screenHeight * 0.50,
               imagePath: '',
               child: Padding(
                 padding: const EdgeInsets.all(15),
@@ -135,18 +134,15 @@ class ProductDetail extends StatelessWidget {
                     Row(
                       children: [
                         for (int i = 0; i < 5; i++)
-                          Icon(Icons.star,
-                              color: AppColors.danger, size: 18),
+                          Icon(Icons.star, color: AppColors.danger, size: 18),
                         SizedBox(width: 6),
-                        Text("5.0",
-                            style: AppTextStyle.categoryTextStyle),
+                        Text("5.0", style: AppTextStyle.categoryTextStyle),
                       ],
                     ),
 
                     SizedBox(height: SizeConfig.blockHeight * 2),
 
-                    Text("Select Size",
-                        style: AppTextStyle.buttonTextStyle),
+                    Text("Select Size", style: AppTextStyle.buttonTextStyle),
 
                     SizedBox(height: SizeConfig.blockHeight * 1),
 
@@ -158,15 +154,14 @@ class ProductDetail extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return Obx(() {
                             final isSelected =
-                                sizeController.selectedIndex.value ==
-                                    index;
+                                sizeController.selectedIndex.value == index;
 
                             return GestureDetector(
-                              onTap: () =>
-                                  sizeController.selectItem(index),
+                              onTap: () => sizeController.selectItem(index),
                               child: Container(
                                 margin: EdgeInsets.only(
-                                    right: SizeConfig.blockWidth * 2),
+                                  right: SizeConfig.blockWidth * 2,
+                                ),
                                 width: SizeConfig.blockWidth * 12,
                                 decoration: BoxDecoration(
                                   color: isSelected
@@ -181,78 +176,55 @@ class ProductDetail extends StatelessWidget {
                                     color: AppColors.lightBlue.withOpacity(0.3),
                                   ),
                                 ),
-                                child: Center(
-                                  child: Text("${40 + index}"),
-                                ),
+                                child: Center(child: Text("${40 + index}")),
                               ),
                             );
                           });
                         },
                       ),
                     ),
-
                     SizedBox(height: SizeConfig.blockHeight * 2),
-
-                    Text("Description",
-                        style: AppTextStyle.heading),
-
+                    Text("Description", style: AppTextStyle.heading),
                     SizedBox(height: SizeConfig.blockHeight * 1),
-
                     Text(
                       "Flywire cables help secure your feet and provide support.\nNike Air cushioning absorbs impact.",
                       style: AppTextStyle.paragrapTextStyle,
                     ),
-
-                    Spacer(),
-
-                    // ✅ PRICE + ADD TO CART
+                    SizedBox(height: 50),
                     Row(
-                      mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           '\$${product.price}',
                           style: AppTextStyle.featureTextStyle,
                         ),
-
                         InkWell(
                           onTap: () {
-                            // ✅ ADD TO CART
                             productController.addToCart(product);
-
-                            // ✅ MESSAGE
                             Get.snackbar(
                               "Success",
                               "${product.name} added to cart",
-                              snackPosition:
-                                  SnackPosition.BOTTOM,
+                              snackPosition: SnackPosition.BOTTOM,
                             );
-
-                            // ✅ GO TO CART
                             Get.to(() => ShoppingScreen());
                           },
                           child: GlassCard(
-                            height:
-                                SizeConfig.blockHeight * 5,
+                            height: SizeConfig.blockHeight * 5,
                             imagePath: '',
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   child: Icon(
                                     Icons.shopping_cart,
-                                    color: AppColors
-                                        .backgroundLight,
+                                    color: AppColors.backgroundLight,
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(10),
                                   child: Text(
                                     'Add to Cart',
-                                    style: AppTextStyle
-                                        .categoryTextStyle,
+                                    style: AppTextStyle.categoryTextStyle,
                                   ),
                                 ),
                               ],
