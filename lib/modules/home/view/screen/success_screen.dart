@@ -1,4 +1,5 @@
 import 'package:e_commerces/app/config/app_assets.dart';
+import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/view/screen/bottom_nav_bar_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
@@ -43,7 +44,7 @@ class SuccessScreen extends StatelessWidget {
                         child: const Icon(
                           Icons.check,
                           size: 60,
-                          color: Colors.white,
+                          color: AppColors.backgroundLight,
                         ),
                       ),
                     );
@@ -55,7 +56,7 @@ class SuccessScreen extends StatelessWidget {
                 /// 🎉 TEXT
                 Text(
                   "Order Successful!",
-                  style: AppTextStyle.heading.copyWith(color: Colors.white),
+                  style: AppTextStyle.heading.copyWith(color: AppColors.backgroundLight),
                 ),
 
                 const SizedBox(height: 10),
@@ -63,7 +64,7 @@ class SuccessScreen extends StatelessWidget {
                 const Text(
                   "Your order has been placed successfully.\nYou can track it anytime.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(color: AppColors.backgroundLight),
                 ),
 
                 const Spacer(),
