@@ -88,7 +88,7 @@ class ShoppingScreen extends StatelessWidget {
                             child: TextField(
                               decoration: InputDecoration(
                                 hintText: "Promo Code",
-                                prefixStyle: TextStyle(color: Colors.white),
+                                prefixStyle: TextStyle(color: AppColors.backgroundLight),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide.none,
@@ -154,8 +154,6 @@ class ShoppingScreen extends StatelessWidget {
       ),
     );
   }
-
-  // helper
   Widget buildRow(String title, double value, {bool isBold = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4),

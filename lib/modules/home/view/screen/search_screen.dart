@@ -48,12 +48,12 @@ class SearchScreen extends StatelessWidget {
                         ? Expanded(
                             child: TextField(
                               autofocus: true,
-                              style:  TextStyle(color: Colors.white),
+                              style:  TextStyle(color: AppColors.backgroundLight),
                               onChanged: controller.search,
                               decoration:  InputDecoration(
                                 hintText: "Search products...",
                                 hintStyle:
-                                    TextStyle(color: Colors.white54),
+                                    TextStyle(color: AppColors.grey300),
                                 border: InputBorder.none,
                               ),
                             ),
@@ -68,7 +68,7 @@ class SearchScreen extends StatelessWidget {
                     if (controller.isSearching.value)
                       IconButton(
                         onPressed: controller.clearSearch,
-                        icon:  Icon(Icons.close, color: Colors.white),
+                        icon:  Icon(Icons.close, color: AppColors.backgroundLight),
                       ),
                   ],
                 ),
@@ -87,11 +87,10 @@ class SearchScreen extends StatelessWidget {
                 return  Center(
                   child: Text(
                     "Start searching...",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppColors.backgroundLight),
                   ),
                 );
               }
-
               if (results.isEmpty) {
                 return  Center(
                   child: Text(
@@ -100,13 +99,11 @@ class SearchScreen extends StatelessWidget {
                   ),
                 );
               }
-
               return ListView.builder(
                 itemCount: results.length,
                 itemBuilder: (context, index) {
-                  // ignore: non_constant_identifier_names, non_ant_identifier_names
+                  // ignore: non_constant_identifier_names
                   final ProductDetail = results[index];
-
                   return Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: SizeConfig.blockWidth * 3,
