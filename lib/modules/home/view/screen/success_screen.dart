@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({super.key});
+ const SuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,25 +23,23 @@ class SuccessScreen extends StatelessWidget {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: EdgeInsets.all(20),
             child: Column(
               children: [
-                const Spacer(),
-
-                /// ✅ SUCCESS ICON
+               Spacer(),
                 TweenAnimationBuilder(
-                  duration: const Duration(milliseconds: 800),
+                  duration: Duration(milliseconds: 800),
                   tween: Tween<double>(begin: 0, end: 1),
                   builder: (context, value, child) {
                     return Transform.scale(
                       scale: value,
                       child: Container(
-                        padding: const EdgeInsets.all(30),
+                        padding: EdgeInsets.all(30),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: Colors.green,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           Icons.check,
                           size: 60,
                           color: AppColors.backgroundLight,
@@ -50,29 +48,23 @@ class SuccessScreen extends StatelessWidget {
                     );
                   },
                 ),
-
-                const SizedBox(height: 30),
-
-                /// 🎉 TEXT
+               SizedBox(height: 30),
                 Text(
                   "Order Successful!",
-                  style: AppTextStyle.heading.copyWith(color: AppColors.backgroundLight),
+                  style: AppTextStyle.heading.copyWith(
+                    color: AppColors.backgroundLight,
+                  ),
                 ),
-
-                const SizedBox(height: 10),
-
-                const Text(
+               SizedBox(height: 10),
+               Text(
                   "Your order has been placed successfully.\nYou can track it anytime.",
                   textAlign: TextAlign.center,
                   style: TextStyle(color: AppColors.backgroundLight),
                 ),
-
-                const Spacer(),
-
-                /// 📦 TRACK ORDER
+               Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Get.snackbar("Info", "Tracking coming soon 🚚");
+                    Get.snackbar("Info", " Tracking coming soon 🚚 ");
                   },
                   child: GlassCard(
                     width: double.infinity,
@@ -86,13 +78,10 @@ class SuccessScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                const SizedBox(height: 15),
-
-                /// 🏠 CONTINUE SHOPPING
+               SizedBox(height: 15),
                 GestureDetector(
                   onTap: () {
-                    Get.to(BottomnavigationbarScreen()); // adjust route
+                    Get.to(BottomnavigationbarScreen()); 
                   },
                   child: GlassCard(
                     width: double.infinity,

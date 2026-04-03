@@ -18,11 +18,9 @@ class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
 
   final controller = Get.find<ProductController>();
-
-  get query => null;
-
-  get results => null;
-
+  Null get query => null;
+  Null get results => null;
+  
   ValueChanged<String>? get search => null;
 
   @override
@@ -59,7 +57,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildHeader() {
     return Padding(
       padding: const EdgeInsets.only(top: 70, right: 20, left: 20),
@@ -69,7 +66,6 @@ class HomeScreen extends StatelessWidget {
           SizedBox(
             width: 80,
             height: 80,
-            
           ),
           Row(
             children: [
@@ -96,7 +92,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildDiscover() {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
@@ -106,7 +101,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 10),
@@ -116,8 +110,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  // ----------------- Popular List -----------------
   Widget _buildPopularList() {
     return Obx(
       () => SizedBox(
@@ -135,9 +127,9 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildPopularItem(ProductModel product) {
     return Padding(
-      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), // responsive padding
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
       child: GlassCard(
-        width: SizeConfig.screenWidth * 0.55, // responsive width
+        width: SizeConfig.screenWidth * 0.55, 
         imagePath: '',
         child: Stack(
           children: [
@@ -164,7 +156,6 @@ class HomeScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Product name and price
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -182,7 +173,6 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // Add to cart button
                       GestureDetector(
                         onTap: () =>
                             Get.to(() => ProductDetail(product: product)),
@@ -202,7 +192,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-            // Favorite button
             Positioned(
               top: SizeConfig.blockHeight * 1.5,
               left: SizeConfig.blockWidth * 3,
@@ -241,8 +230,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  // ----------------- Latest List -----------------
   Widget _buildLatestList() {
     return Obx(
       () => ListView.builder(
@@ -255,10 +242,9 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
   Widget _buildLatestItem(ProductModel product) {
     return Padding(
-      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), // responsive padding
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), 
       child: Stack(
         children: [
           GlassCard(

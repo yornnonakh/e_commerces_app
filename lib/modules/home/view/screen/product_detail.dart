@@ -12,17 +12,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetail extends StatelessWidget {
+
   final ProductModel product;
-
   final ProductDetailController controller = Get.put(ProductDetailController());
-
   final SizeController sizeController = Get.put(SizeController());
-
-  final ProductController productController =
-      Get.find<ProductController>(); 
+  final ProductController productController = Get.find<ProductController>(); 
 
   ProductDetail({super.key, required this.product});
-
   List<String>? get images => product.images.isNotEmpty
       ? product.images
       : AppAssets.latestProductsDetail;
@@ -30,11 +26,9 @@ class ProductDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-
     return Scaffold(
       body: Stack(
         children: [
-          // Background
           Container(
             width: SizeConfig.screenWidth,
             height: SizeConfig.screenHeight,
@@ -45,8 +39,6 @@ class ProductDetail extends StatelessWidget {
               ),
             ),
           ),
-
-          // Top design
           Container(
             width: SizeConfig.screenWidth,
             height: SizeConfig.screenHeight * 0.45,
@@ -62,8 +54,6 @@ class ProductDetail extends StatelessWidget {
               ),
             ),
           ),
-
-          // Image slider
           Positioned(
             top: SizeConfig.blockHeight * 12,
             left: SizeConfig.blockWidth * 5,
@@ -75,9 +65,8 @@ class ProductDetail extends StatelessWidget {
                   child: Obx(() {
                     int index = controller.currentIndex.value;
                     if (index >= images!.length) index = 0;
-
                     return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
+                      duration:  Duration(milliseconds: 0),
                       child: Image.asset(
                         images![index],
                         key: ValueKey(index),
@@ -100,22 +89,16 @@ class ProductDetail extends StatelessWidget {
               ],
             ),
           ),
-
-          // Back button
           Positioned(
             top: SizeConfig.blockHeight * 7,
             left: SizeConfig.blockWidth * 5,
             child: _iconButton(Icons.arrow_back, () => Get.back()),
           ),
-
-          // Favorite button (optional)
           Positioned(
             top: SizeConfig.blockHeight * 7,
             right: SizeConfig.blockWidth * 5,
             child: _iconButton(Icons.favorite_border, () {}),
           ),
-
-          // Bottom card
           Positioned(
             bottom: 0,
             child: GlassCard(
@@ -123,14 +106,12 @@ class ProductDetail extends StatelessWidget {
               height: SizeConfig.screenHeight * 0.50,
               imagePath: '',
               child: Padding(
-                padding: const EdgeInsets.all(15),
+                padding:  EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(product.name, style: AppTextStyle.heading),
-
                     SizedBox(height: SizeConfig.blockHeight * 1),
-
                     Row(
                       children: [
                         for (int i = 0; i < 5; i++)
@@ -139,13 +120,9 @@ class ProductDetail extends StatelessWidget {
                         Text("5.0", style: AppTextStyle.categoryTextStyle),
                       ],
                     ),
-
                     SizedBox(height: SizeConfig.blockHeight * 2),
-
                     Text("Select Size", style: AppTextStyle.buttonTextStyle),
-
                     SizedBox(height: SizeConfig.blockHeight * 1),
-
                     SizedBox(
                       height: SizeConfig.blockWidth * 12,
                       child: ListView.builder(
@@ -153,9 +130,7 @@ class ProductDetail extends StatelessWidget {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Obx(() {
-                            final isSelected =
-                                sizeController.selectedIndex.value == index;
-
+                            final isSelected = sizeController.selectedIndex.value == index;
                             return GestureDetector(
                               onTap: () => sizeController.selectItem(index),
                               child: Container(
@@ -187,7 +162,7 @@ class ProductDetail extends StatelessWidget {
                     Text("Description", style: AppTextStyle.heading),
                     SizedBox(height: SizeConfig.blockHeight * 1),
                     Text(
-                      "Flywire cables help secure your feet and provide support.\nNike Air cushioning absorbs impact.",
+                      "Flywire cables help secure your feet and provide support.\n Nike Air cushioning absorbs impact.",
                       style: AppTextStyle.paragrapTextStyle,
                     ),
                     SizedBox(height: 50),
@@ -214,14 +189,14 @@ class ProductDetail extends StatelessWidget {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(10),
+                                  padding:  EdgeInsets.all(10),
                                   child: Icon(
                                     Icons.shopping_cart,
                                     color: AppColors.backgroundLight,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(10),
+                                  padding:  EdgeInsets.all(10),
                                   child: Text(
                                     'Add to Cart',
                                     style: AppTextStyle.categoryTextStyle,
@@ -242,8 +217,6 @@ class ProductDetail extends StatelessWidget {
       ),
     );
   }
-
-  // Button
   Widget _iconButton(IconData icon, VoidCallback onTap) {
     return GlassCard(
       width: SizeConfig.blockWidth * 10,
