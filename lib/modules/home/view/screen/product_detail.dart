@@ -4,7 +4,7 @@ import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/controller/products_controller.dart';
 import 'package:e_commerces/modules/home/controller/products_detail_controller.dart';
-import 'package:e_commerces/modules/home/controller/size_controller.dart'; 
+import 'package:e_commerces/modules/home/controller/size_controller.dart';
 import 'package:e_commerces/modules/home/model/products_model.dart';
 import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
@@ -12,11 +12,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductDetail extends StatelessWidget {
-
   final ProductModel product;
   final ProductDetailController controller = Get.put(ProductDetailController());
   final SizeController sizeController = Get.put(SizeController());
-  final ProductController productController = Get.find<ProductController>(); 
+  final ProductController productController = Get.find<ProductController>();
 
   ProductDetail({super.key, required this.product});
   List<String>? get images => product.images.isNotEmpty
@@ -66,7 +65,7 @@ class ProductDetail extends StatelessWidget {
                     int index = controller.currentIndex.value;
                     if (index >= images!.length) index = 0;
                     return AnimatedSwitcher(
-                      duration:  Duration(milliseconds: 0),
+                      duration: Duration(milliseconds: 0),
                       child: Image.asset(
                         images![index],
                         key: ValueKey(index),
@@ -106,23 +105,30 @@ class ProductDetail extends StatelessWidget {
               height: SizeConfig.screenHeight * 0.50,
               imagePath: '',
               child: Padding(
-                padding:  EdgeInsets.all(15),
+                padding: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(product.name, style: AppTextStyle.heading),
-                    SizedBox(height: SizeConfig.blockHeight * 1),
+                    SizedBox(height: SizeConfig.blockHeight * 3),
                     Row(
                       children: [
                         for (int i = 0; i < 5; i++)
-                          Icon(Icons.star, color: AppColors.danger, size: 18),
+                          Icon(
+                            Icons.star,
+                            color: AppColors.lightBlue,
+                            size: 18,
+                          ),
                         SizedBox(width: 6),
-                        Text("5.0", style: AppTextStyle.categoryTextStyle),
+                        Text(
+                          "5.0 Rating",
+                          style: AppTextStyle.categoryTextStyle,
+                        ),
                       ],
                     ),
-                    SizedBox(height: SizeConfig.blockHeight * 2),
+                    SizedBox(height: SizeConfig.blockHeight * 0.4),
                     Text("Select Size", style: AppTextStyle.buttonTextStyle),
-                    SizedBox(height: SizeConfig.blockHeight * 1),
+                    SizedBox(height: SizeConfig.blockHeight * 0.4),
                     SizedBox(
                       height: SizeConfig.blockWidth * 12,
                       child: ListView.builder(
@@ -130,42 +136,51 @@ class ProductDetail extends StatelessWidget {
                         itemCount: 5,
                         itemBuilder: (context, index) {
                           return Obx(() {
-                            final isSelected = sizeController.selectedIndex.value == index;
+                            final isSelected =
+                                sizeController.selectedIndex.value == index;
                             return GestureDetector(
                               onTap: () => sizeController.selectItem(index),
                               child: Container(
                                 margin: EdgeInsets.only(
-                                  right: SizeConfig.blockWidth * 2,
+                                  right: SizeConfig.blockWidth * 1,
                                 ),
                                 width: SizeConfig.blockWidth * 12,
                                 decoration: BoxDecoration(
                                   color: isSelected
-                                      ? AppColors.danger
+                                      ? AppColors.backgroundLight.withOpacity(
+                                          0.4,
+                                        )
                                       // ignore: deprecated_member_use
                                       : AppColors.backgroundLight.withOpacity(
-                                          0.3,
+                                          0.0,
                                         ),
-                                  borderRadius: BorderRadius.circular(100),
+                                  borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
                                     // ignore: deprecated_member_use
-                                    color: AppColors.lightBlue.withOpacity(0.3),
+                                    color: AppColors.backgroundLight
+                                        .withOpacity(0.4),
                                   ),
                                 ),
-                                child: Center(child: Text("${40 + index}")),
+                                child: Center(
+                                  child: Text(
+                                    "${40 + index}",
+                                    style: AppTextStyle.categoryTextStyle,
+                                  ),
+                                ),
                               ),
                             );
                           });
                         },
                       ),
                     ),
-                    SizedBox(height: SizeConfig.blockHeight * 2),
+                    SizedBox(height: SizeConfig.blockHeight * 2.5),
                     Text("Description", style: AppTextStyle.heading),
-                    SizedBox(height: SizeConfig.blockHeight * 1),
+                    SizedBox(height: SizeConfig.blockHeight * 0.4),
                     Text(
                       "Flywire cables help secure your feet and provide support.\n Nike Air cushioning absorbs impact.",
                       style: AppTextStyle.paragrapTextStyle,
                     ),
-                    SizedBox(height: 50),
+                    SizedBox(height: 45),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -189,14 +204,14 @@ class ProductDetail extends StatelessWidget {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:  EdgeInsets.all(10),
+                                  padding: EdgeInsets.all(8),
                                   child: Icon(
                                     Icons.shopping_cart,
                                     color: AppColors.backgroundLight,
                                   ),
                                 ),
                                 Padding(
-                                  padding:  EdgeInsets.all(10),
+                                  padding: const EdgeInsets.only(right: 10),
                                   child: Text(
                                     'Add to Cart',
                                     style: AppTextStyle.categoryTextStyle,
@@ -217,6 +232,7 @@ class ProductDetail extends StatelessWidget {
       ),
     );
   }
+
   Widget _iconButton(IconData icon, VoidCallback onTap) {
     return GlassCard(
       width: SizeConfig.blockWidth * 10,

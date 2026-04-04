@@ -43,4 +43,14 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     fontFamily: 'Robot'
   );
+  static const textStyleSmbold = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+    color: AppColors.grey500
+  );
+  static const textStyleMdbold = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 18,
+    color: AppColors.backgroundLight
+  );
 }
