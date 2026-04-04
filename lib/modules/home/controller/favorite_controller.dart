@@ -1,5 +1,6 @@
 import 'package:e_commerces/modules/home/model/products_model.dart';
-import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class FavoriteController extends GetxController {
   var favoriteList = <ProductModel>[].obs;

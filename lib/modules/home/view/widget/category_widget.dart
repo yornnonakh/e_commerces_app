@@ -40,7 +40,7 @@ class CategoryWidget extends StatelessWidget {
                   
                   gradient: isSelected
                       ? LinearGradient(
-                          colors: [AppColors.brightBlue, AppColors.lightBlue],
+                          colors: [AppColors.grey100.withOpacity(0.1), AppColors.grey500.withOpacity(0.1)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         )
@@ -48,7 +48,7 @@ class CategoryWidget extends StatelessWidget {
                   color: isSelected
                       ? null
                       // ignore: deprecated_member_use
-                      : AppColors.backgroundLight.withOpacity(0.2),
+                      : AppColors.backgroundLight.withOpacity(0.0),
                   borderRadius: BorderRadius.circular(
                     SizeConfig.blockWidth * 4,
                   ),

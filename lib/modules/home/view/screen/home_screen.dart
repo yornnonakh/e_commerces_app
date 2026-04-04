@@ -1,3 +1,4 @@
+import 'package:e_commerces/modules/home/view/screen/favorite_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
@@ -20,7 +21,7 @@ class HomeScreen extends StatelessWidget {
   final controller = Get.find<ProductController>();
   Null get query => null;
   Null get results => null;
-  
+
   ValueChanged<String>? get search => null;
 
   @override
@@ -40,7 +41,7 @@ class HomeScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _buildHeader(),
+            buildHeader,
             _buildDiscover(),
             SizedBox(height: 8),
             SlideShowWidget(),
@@ -57,18 +58,26 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-  Widget _buildHeader() {
+
+  Padding get buildHeader {
     return Padding(
       padding: const EdgeInsets.only(top: 70, right: 20, left: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-            width: 80,
-            height: 80,
-          ),
+          SizedBox(width: 80, height: 80),
           Row(
             children: [
+              IconButton(
+                onPressed: () {
+                  // Get.to(FavoriteScreen());
+                },
+                icon: Icon(
+                  Icons.favorite,
+                  size: 30,
+                  color: AppColors.backgroundLight,
+                ),
+              ),
               Obx(() {
                 final favCount = controller.favoriteProducts.length;
                 return Stack(
@@ -92,6 +101,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildDiscover() {
     return Padding(
       padding: const EdgeInsets.only(left: 20),
@@ -101,6 +111,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildSectionTitle(String title) {
     return Padding(
       padding: const EdgeInsets.only(left: 20, top: 10),
@@ -110,6 +121,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildPopularList() {
     return Obx(
       () => SizedBox(
@@ -129,7 +141,7 @@ class HomeScreen extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
       child: GlassCard(
-        width: SizeConfig.screenWidth * 0.55, 
+        width: SizeConfig.screenWidth * 0.55,
         imagePath: '',
         child: Stack(
           children: [
@@ -177,8 +189,8 @@ class HomeScreen extends StatelessWidget {
                         onTap: () =>
                             Get.to(() => ProductDetail(product: product)),
                         child: GlassCard(
-                          width: SizeConfig.blockWidth * 12,
-                          height: SizeConfig.blockWidth * 12,
+                          width: SizeConfig.blockWidth * 10.5,
+                          height: SizeConfig.blockWidth * 10.5,
                           imagePath: '',
                           child: Icon(
                             Icons.add_shopping_cart,
@@ -230,6 +242,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildLatestList() {
     return Obx(
       () => ListView.builder(
@@ -242,9 +255,10 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
   Widget _buildLatestItem(ProductModel product) {
     return Padding(
-      padding: EdgeInsets.all(SizeConfig.blockWidth * 3), 
+      padding: EdgeInsets.all(SizeConfig.blockWidth * 3),
       child: Stack(
         children: [
           GlassCard(
@@ -266,7 +280,7 @@ class HomeScreen extends StatelessWidget {
                   padding: EdgeInsets.all(SizeConfig.blockWidth * 2),
                   child: SizedBox(
                     width: SizeConfig.screenWidth * 0.49,
-                    height: SizeConfig.screenHeight * 0.19,
+                    height: SizeConfig.screenHeight * 0.18,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -292,7 +306,7 @@ class HomeScreen extends StatelessWidget {
                                 fontSize: SizeConfig.blockWidth * 5,
                               ),
                             ),
-                            SizedBox(width: SizeConfig.blockWidth * 2),
+                            SizedBox(width: SizeConfig.blockWidth * 1.5),
                             GestureDetector(
                               onTap: () {
                                 Get.to(ProductDetail(product: product));
@@ -301,7 +315,7 @@ class HomeScreen extends StatelessWidget {
                                 imagePath: '',
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
-                                    vertical: SizeConfig.blockHeight * 1.5,
+                                    vertical: SizeConfig.blockHeight * 1.3,
                                     horizontal: SizeConfig.blockWidth * 3,
                                   ),
                                   child: Row(
@@ -319,7 +333,7 @@ class HomeScreen extends StatelessWidget {
                                         style: AppTextStyle.paragrapTextStyle
                                             .copyWith(
                                               fontSize:
-                                                  SizeConfig.blockWidth * 3.2,
+                                                  SizeConfig.blockWidth * 3.1,
                                             ),
                                       ),
                                     ],

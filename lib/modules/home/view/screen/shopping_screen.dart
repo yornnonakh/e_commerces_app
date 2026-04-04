@@ -10,10 +10,8 @@ import 'package:get/get.dart';
 
 class ShoppingScreen extends StatelessWidget {
   ShoppingScreen({super.key});
-
   final controller = Get.find<ProductController>();
 
-  @override
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,138 +27,143 @@ class ShoppingScreen extends StatelessWidget {
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16),
-            child: GlassCard(
-              imagePath: '',
-              child: Padding(
-                padding: EdgeInsets.all(15),
-                child: Column(
+            child: Column(
+              children: [
+                Row(
                   children: [
-                    // HEADER
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () => Get.back(),
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: AppColors.backgroundLight,
-                          ),
-                        ),
-                        Spacer(),
-                        Text(
-                          "Shopping Bag",
-                          style: AppTextStyle.featureTextStyle,
-                        ),
-                        Spacer(),
-                        GlassCard(
-                          imagePath: '',
-                          child: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.shopping_bag_outlined,
-                              color: AppColors.backgroundLight,
-                            ),
-                          ),
-                        ),
-                      ],
+                    IconButton(
+                      onPressed: () => Get.back(),
+                      icon: Icon(
+                        Icons.arrow_back_ios,
+                        color: AppColors.backgroundLight,
+                      ),
                     ),
-                    SizedBox(height: 10),
-                    Expanded(
-                      child: Obx(() {
-                        if (controller.cartList.isEmpty) {
-                          return Center(child: Text("Cart is empty"));
-                        }
-                        return ListView.builder(
-                          itemCount: controller.cartList.length,
-                          itemBuilder: (context, index) {
-                            var item = controller.cartList[index];
-                            return CartItem(item: item, index: index);
-                          },
-                        );
-                      }),
-                    ),
-                    SizedBox(height: 10),
-                    // PROMO
-                    Row(
-                      children: [
-                        Expanded(
-                          child: GlassCard(
-                            imagePath: '',
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Promo Code",
-                                prefixStyle: TextStyle(color: AppColors.backgroundLight),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                  borderSide: BorderSide.none,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        GlassCard(
-                          imagePath: '',
-                          child: Padding(
-                            padding: const EdgeInsets.all(15),
-                            child: Center(
-                              child: Text(
-                                "Apply",
-                                style: AppTextStyle.categoryTextStyle,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    // TOTAL SECTION
-                    Obx(() {
-                      double subtotal = controller.total;
-                      double shipping = 4.99;
-                      double total = subtotal + shipping;
-                      return Column(
-                        children: [
-                          buildRow("Subtotal", subtotal),
-                          buildRow("Shipping", shipping),
-                          Divider(),
-                          buildRow("Bag Total", total, isBold: true),
-                        ],
-                      );
-                    }),
-                    SizedBox(height: 20),
-                    // CHECKOUT BUTTON
-                    InkWell(
-                      onTap: () {
-                        Get.to(() => PaymentScreen());
-                      },
-                      child: GlassCard(
-                        width: double.infinity,
-                        height: 60,
-                        imagePath: '',
-                        child: Center(
-                          child: Text(
-                            "Proceed To Checkout",
-                            style: TextStyle(color: AppColors.backgroundLight),
-                          ),
+                    Spacer(),
+                    Text("Shopping Bag", style: AppTextStyle.featureTextStyle),
+                    Spacer(),
+                    GlassCard(
+                      imagePath: '',
+                      child: Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Icon(
+                          Icons.shopping_bag_outlined,
+                          color: AppColors.backgroundLight,
                         ),
                       ),
                     ),
                   ],
                 ),
-              ),
+                SizedBox(height: 10),
+                Expanded(
+                  child: GlassCard(
+                    imagePath: '',
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: Obx(() {
+                              if (controller.cartList.isEmpty) {
+                                return Center(
+                                  child: Text(
+                                    'Cart is empty',
+                                    style: AppTextStyle.textStyleSmbold,
+                                  ),
+                                );
+                              }
+                              return ListView.builder(
+                                itemCount: controller.cartList.length,
+                                itemBuilder: (context, index) {
+                                  var item = controller.cartList[index];
+                                  return CartItem(item: item, index: index);
+                                },
+                              );
+                            }),
+                          ),
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: GlassCard(
+                                  imagePath: '',
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      hintText: "Promo Code",
+                                      hintStyle: TextStyle(
+                                        color: AppColors.grey300,
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: BorderSide.none,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              GlassCard(
+                                imagePath: '',
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15),
+                                  child: Text(
+                                    "Apply",
+                                    style: AppTextStyle.categoryTextStyle,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 20),
+                          Obx(() {
+                            double subtotal = controller.total;
+                            double shipping = 4.99;
+                            double total = subtotal + shipping;
+
+                            return Column(
+                              children: [
+                                buildRow("Subtotal", subtotal),
+                                buildRow("Shipping", shipping),
+                                Divider(color: AppColors.backgroundLight),
+                                buildRow("Bag Total", total, isBold: true),
+                              ],
+                            );
+                          }),
+                          SizedBox(height: 20),
+                          InkWell(
+                            onTap: () {
+                              Get.to(() => PaymentScreen());
+                            },
+                            child: GlassCard(
+                              width: double.infinity,
+                              height: 60,
+                              imagePath: '',
+                              child: Center(
+                                child: Text(
+                                  "Proceed To Checkout",
+                                  style: AppTextStyle.categoryTextStyle,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
       ),
     );
   }
+
   Widget buildRow(String title, double value, {bool isBold = false}) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: AppTextStyle.categoryTextStyle),
+          Text(title, style: AppTextStyle.textStyleMdbold),
           Text(
             "\$${value.toStringAsFixed(2)}",
             style: AppTextStyle.categoryTextStyle,

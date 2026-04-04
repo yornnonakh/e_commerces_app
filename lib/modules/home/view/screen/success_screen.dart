@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SuccessScreen extends StatelessWidget {
- const SuccessScreen({super.key});
+  const SuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class SuccessScreen extends StatelessWidget {
             padding: EdgeInsets.all(20),
             child: Column(
               children: [
-               Spacer(),
+                Spacer(),
                 TweenAnimationBuilder(
                   duration: Duration(milliseconds: 800),
                   tween: Tween<double>(begin: 0, end: 1),
@@ -48,27 +48,27 @@ class SuccessScreen extends StatelessWidget {
                     );
                   },
                 ),
-               SizedBox(height: 30),
+                SizedBox(height: 30),
                 Text(
                   "Order Successful!",
                   style: AppTextStyle.heading.copyWith(
                     color: AppColors.backgroundLight,
                   ),
                 ),
-               SizedBox(height: 10),
-               Text(
-                  "Your order has been placed successfully.\nYou can track it anytime.",
+                SizedBox(height: 10),
+                Text(
+                  "Your order has been placed successfully. \n You can track it anytime.",
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.backgroundLight),
+                  style: TextStyle(color: AppColors.grey300),
                 ),
-               Spacer(),
+                Spacer(),
                 GestureDetector(
                   onTap: () {
                     Get.snackbar("Info", " Tracking coming soon 🚚 ");
                   },
                   child: GlassCard(
-                    width: double.infinity,
-                    height: 60,
+                    width: 250,
+                    height: 50,
                     imagePath: '',
                     child: Center(
                       child: Text(
@@ -78,14 +78,14 @@ class SuccessScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-               SizedBox(height: 15),
+                SizedBox(height: 15),
                 GestureDetector(
                   onTap: () {
-                    Get.to(BottomnavigationbarScreen()); 
+                    Get.to(BottomnavigationbarScreen());
                   },
                   child: GlassCard(
-                    width: double.infinity,
-                    height: 60,
+                    width: 250,
+                    height: 50,
                     imagePath: '',
                     child: Center(
                       child: Text(

@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
   var currentIndex = 0.obs;
+  var cartList = <ProductModel>[].obs;
+  var favoriteList = <ProductModel>[].obs;
 
   void nextImage(int length) {
     if (length == 0) return;
@@ -20,7 +22,16 @@ class ProductDetailController extends GetxController {
     super.onClose();
   }
 
-  // Object? isFavorite(ProductModel product) {}
+  void toggleFavorite(ProductModel product) {
+    if (favoriteList.contains(product)) {
+      favoriteList.remove(product);
+    } else {
+      favoriteList.add(product);
+    }
+  }
 
-  void toggleFavorite(ProductModel product) {}
+  // ✅ CHECK FAVORITE
+  bool isFavorite(ProductModel product) {
+    return favoriteList.contains(product);
+  }
 }

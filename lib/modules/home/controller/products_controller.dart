@@ -186,6 +186,7 @@ void addToCart(ProductModel product) {
       cartList.refresh();
     } else {
       cartList.add(ProductModel(
+        
         name: product.name,
         price: product.price,
         image: product.image,
@@ -225,5 +226,7 @@ void decreaseQty(int index) {
     return cartList.fold(
         0, (sum, item) => sum + item.price * item.qty);
   }
+
+  
 }
 

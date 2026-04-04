@@ -16,73 +16,81 @@ class CartItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GlassCard(
-      imagePath: '',
-      child: Padding(
-        padding: EdgeInsets.only(right: 10),
-        child: Row(
-          children: [
-            ClipRRect(
-              child: Image.asset(
-                item.image,
-                width: 120,
-                height: 120,
-                fit: BoxFit.cover,
-              ),
-            ),
-            SizedBox(width: 10),
-            // INFO
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.name,
-                    style: AppTextStyle.categoryTextStyle,
-                  ),
-                  SizedBox(height: 4),
-                  Text("\$${item.price}",style: AppTextStyle.categoryTextStyle,),
-                ],
-              ),
-            ),
-
-            // QTY + DELETE
-            Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 40),
-                  child: GestureDetector(
-                    onTap: () => controller.cartList.removeAt(index),
-                    child: Icon(
-                      Icons.close,
-                      size: 25,
-                      color: AppColors.backgroundLight,
-                    ),
-                  ),
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: GlassCard(
+        imagePath: '',
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Row(
+            children: [
+              ClipRRect(
+                child: Image.asset(
+                  item.image,
+                  width: 120,
+                  height: 120,
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(height: 45),
-                Row(
+              ),
+              SizedBox(width: 10),
+              // INFO
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                      onTap: () => controller.decreaseQty(index),
-                      child: buildCircle(Icons.remove),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      child: Text(
-                        "${item.qty}",
-                        style: TextStyle(color: AppColors.backgroundLight),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () => controller.increaseQty(index),
-                      child: buildCircle(Icons.add),
+                    Text(item.name, style: AppTextStyle.categoryTextStyle),
+                    Text(
+                      "\$${item.price}",
+                      style: AppTextStyle.categoryTextStyle,
                     ),
                   ],
                 ),
-              ],
-            ),
-          ],
+              ),
+
+              // QTY + DELETE
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 40),
+                    child: GestureDetector(
+                      onTap: () => controller.cartList.removeAt(index),
+                      child: GlassCard(
+                        imagePath: '',
+                        child: Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: Icon(
+                            Icons.close,
+                            size: 18,
+                            color: AppColors.backgroundLight,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 45),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => controller.decreaseQty(index),
+                        child: buildCircle(Icons.remove),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5),
+                        child: Text(
+                          "${item.qty}",
+                          style: TextStyle(color: AppColors.backgroundLight),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => controller.increaseQty(index),
+                        child: buildCircle(Icons.add),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
