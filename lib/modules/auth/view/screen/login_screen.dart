@@ -109,7 +109,7 @@ class LoginScreen extends StatelessWidget {
         TextButton(
           onPressed: () => Get.to(() => SignUpScreen()),
           child: Text("Sign Up", style: TextStyle(
-            color: AppColors.grey500
+            color: AppColors.backgroundLight
           ),),
         ),
       ],
@@ -118,7 +118,7 @@ class LoginScreen extends StatelessWidget {
   Row get divider {
     return Row(
       children: [
-        Expanded(child: Divider(color: AppColors.grey500)),
+        Expanded(child: Divider(color: AppColors.backgroundLight)),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 10),
           child: Text(
@@ -126,7 +126,7 @@ class LoginScreen extends StatelessWidget {
             style: AppTextStyle.categoryTextStyle,
           ),
         ),
-        Expanded(child: Divider(color: AppColors.grey500)),
+        Expanded(child: Divider(color: AppColors.backgroundLight)),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:e_commerces/app/config/app_assets.dart';
+import 'package:e_commerces/app/theme/app_colors.dart';
 import 'package:e_commerces/app/theme/app_text_style.dart';
 import 'package:e_commerces/modules/home/view/screen/success_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/glass_card_widget.dart';
@@ -37,7 +38,7 @@ class AddCardWidget extends StatelessWidget {
                       onPressed: () {
                         Get.back();
                       },
-                      icon: Icon(Icons.arrow_back_ios),
+                      icon: Icon(Icons.arrow_back_ios, color: AppColors.backgroundLight,),
                     ),
                     SizedBox(width: 10),
                     Text(
@@ -45,6 +46,7 @@ class AddCardWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        color: AppColors.backgroundLight
                       ),
                     ),
                   ],
@@ -70,7 +72,7 @@ class AddCardWidget extends StatelessWidget {
                 Row(
                   children: [
                     Checkbox(value: true, onChanged: (v) {}),
-                    Text("Save card info"),
+                    Text("Save card info", style: AppTextStyle.categoryTextStyle,),
                   ],
                 ),
 
@@ -112,6 +114,9 @@ class AddCardWidget extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           hintText: hint,
+          hintStyle: TextStyle(
+            color: AppColors.grey500
+          ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
@@ -127,7 +132,7 @@ class AddCardWidget extends StatelessWidget {
         numberController.text.isEmpty ||
         cvvController.text.isEmpty ||
         expireController.text.isEmpty) {
-      Get.snackbar("Error", "Please fill all fields");
+      Get.snackbar("Error", "Please fill all fields",colorText: AppColors.backgroundLight);
       return;
     }
 
