@@ -194,6 +194,8 @@ class ProductDetail extends StatelessWidget {
                             Get.snackbar(
                               "Success",
                               "${product.name} added to cart",
+                              colorText: AppColors.backgroundLight,
+
                               snackPosition: SnackPosition.BOTTOM,
                             );
                             Get.to(() => ShoppingScreen());

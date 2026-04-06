@@ -64,7 +64,7 @@ class SuccessScreen extends StatelessWidget {
                 Spacer(),
                 GestureDetector(
                   onTap: () {
-                    Get.snackbar("Info", " Tracking coming soon 🚚 ");
+                    Get.snackbar("Info", " Tracking coming soon 🚚 ", colorText: AppColors.backgroundLight);
                   },
                   child: GlassCard(
                     width: 250,

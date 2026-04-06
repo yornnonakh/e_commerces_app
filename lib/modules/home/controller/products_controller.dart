@@ -17,7 +17,7 @@ class ProductController extends GetxController {
   void _loadProducts() {
     productsLatest.addAll([
       ProductModel(
-        name: "Shoe 1",
+        name: "NIKE",
         price: 50,
         image: "assets/images/products_latest/IDE000.jpg",
         images: [
@@ -32,7 +32,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Shoe 3",
+        name: "NIKE",
         price: 50,
         image: "assets/images/products_latest/IDG000.jpg",
         images: [
@@ -47,7 +47,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Shoe 3",
+        name: "NIKE",
         price: 50,
         image: "assets/images/products_latest/IDL000.jpg",
         images: [
@@ -62,7 +62,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Shoe 3",
+        name: "NIKE",
         price: 50,
         image: "assets/images/products_latest/IDZ000.jpg",
         images: [
@@ -77,7 +77,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Shoe 3",
+        name: "NIKE",
         price: 50,
         image: "assets/images/products_latest/IDC000.jpg",
         images: [
@@ -98,7 +98,7 @@ class ProductController extends GetxController {
   void _loadPopularProducts() {
     productsPopular.addAll([
       ProductModel(
-        name: "Popular Shoe 1",
+        name: "SABAR NIKE",
         price: 300,
         image: "assets/images/products_popular/IDA000.jpg",
         images: [
@@ -113,7 +113,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Popular Shoe 1",
+        name: "SABAR NIKE",
         price: 300,
         image: "assets/images/products_popular/IDH000.jpg",
         images: [
@@ -129,7 +129,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Popular Shoe 1",
+        name: "SABAR NIKE",
         price: 300,
         image: "assets/images/products_popular/IDI000.jpg",
         images: [
@@ -143,7 +143,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Popular Shoe 1",
+        name: "SABAR NIKE",
         price: 300,
         image: "assets/images/products_popular/IDM000.jpg",
         images: [
@@ -159,7 +159,7 @@ class ProductController extends GetxController {
         ],
       ),
       ProductModel(
-        name: "Popular Shoe 1",
+        name: "NIKE",
         price: 200,
         image: "assets/images/products_popular/IDJ000.jpg",
         images: [

@@ -1,4 +1,3 @@
-import 'package:e_commerces/modules/home/view/screen/favorite_screen.dart';
 import 'package:e_commerces/modules/home/view/screen/shopping_screen.dart';
 import 'package:e_commerces/modules/home/view/widget/category_widget.dart';
 import 'package:e_commerces/modules/home/view/widget/slide_show_widget.dart';
