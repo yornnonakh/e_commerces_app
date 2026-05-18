@@ -15,20 +15,16 @@ class ProductSearchController extends GetxController {
         'shoes 7',
         'shoes 8',
   ];
-
   void startSearch() {
     isSearching.value = true;
   }
-
   void clearSearch() {
     isSearching.value = false;
     query.value = '';
     results.clear();
   }
-
   void search(String text) {
     query.value = text;
-
     results.value = products
         .where((p) => p.toLowerCase().contains(text.toLowerCase()))
         .toList();

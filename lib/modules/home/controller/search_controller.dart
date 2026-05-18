@@ -7,16 +7,14 @@ class SearchControllerX extends GetxController {
 
   // Dummy data (replace with Firebase/API later)
   final List<String> allProducts = [
-    "Shoes 1",
-    "Shoes 1",
-    "Shoes 1",
-    "Shoes 1",
-    "Shoes 1",
+    "Sabar Nike",
+    "Product",
+    "Sabar New branch",
+    "Nike Model",
+    "Popular ",
   ];
-
   void onSearch(String value) {
     searchText.value = value;
-
     if (value.isEmpty) {
       results.clear();
     } else {
@@ -26,10 +24,8 @@ class SearchControllerX extends GetxController {
     }
   }
 }
-
 void showSearchDialog() {
   final controller = Get.put(SearchControllerX());
-
   Get.dialog(
     Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
