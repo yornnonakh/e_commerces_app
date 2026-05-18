@@ -6,14 +6,12 @@ class ProductController extends GetxController {
   final productsPopular = <ProductModel>[].obs;
   final favoriteProducts = <ProductModel>[].obs;
   final cartList = <ProductModel>[].obs;
-
   @override
   void onInit() {
     super.onInit();
     _loadProducts();
     _loadPopularProducts();
   }
-
   void _loadProducts() {
     productsLatest.addAll([
       ProductModel(
@@ -91,10 +89,9 @@ class ProductController extends GetxController {
           "assets/images/products_latest/IDC007.jpg",
         ],
       ),
-      // Add more products
+      // add more product over there
     ]);
   }
-
   void _loadPopularProducts() {
     productsPopular.addAll([
       ProductModel(
@@ -195,8 +192,6 @@ void addToCart(ProductModel product) {
       ));
     }
   }
-
-  // ✅ FAVORITE
   void toggleFavorite(ProductModel product) {
     if (favoriteProducts.contains(product)) {
       favoriteProducts.remove(product);
@@ -204,29 +199,21 @@ void addToCart(ProductModel product) {
       favoriteProducts.add(product);
     }
   }
-
   bool isFavorite(ProductModel product) =>
       favoriteProducts.contains(product);
-
-  // ✅ INCREASE
   void increaseQty(int index) {
   cartList[index].qty++;
   cartList.refresh(); // 🔥 IMPORTANT
 }
-
 void decreaseQty(int index) {
   if (cartList[index].qty > 1) {
     cartList[index].qty--;
     cartList.refresh(); // 🔥 IMPORTANT
   }
 }
-
-  // ✅ TOTAL
   double get total {
     return cartList.fold(
         0, (sum, item) => sum + item.price * item.qty);
   }
-
-  
 }
 

@@ -8,7 +8,6 @@ class FavoriteController extends GetxController {
   bool isFavorite(ProductModel product) {
     return favoriteList.contains(product);
   }
-
   void toggleFavorite(ProductModel product) {
     if (isFavorite(product)) {
       favoriteList.remove(product);
